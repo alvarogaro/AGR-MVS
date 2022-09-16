@@ -5,7 +5,7 @@ Dentro de la grandes franquicias se presenta un problema relacionado con las con
 
 
 ## Propuesta De Solución
-La solución que se propone en un inicio parte 
+La solución que se propone en un inicio es la creación de un servicio web que permita a una franquicia registrar sus distintas tiendas y los empleados que tiene en la tienda con sus horarios, a su vez cada tienda dentro de su apartado va a ir registrando las compras que van teniendo, de manera que cada semana se va a ir generando por parte de la aplicación un informe de las ventas de cada tienda y el numero de empleados que tiene, generando una serie de tablas que nos indiquen las tiendas que tienen mayores ventas, tiendas con mayor desbalance  ventas/empleados y funciones a nivel global sobre zonas donde hay mayores ventas, franjas horarias de mayor venta a nivel global...
 
 
 ## Elementos Principales
