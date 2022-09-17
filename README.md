@@ -1,12 +1,12 @@
-# FRANPROVISION
+# FRANCAPP
 
 ## Descripción
-Dentro de la grandes franquicias de hostelería se presenta un problema relacionado con las contrataciones, turnos  y el reparto de personal entre sus distintas tiendas. Muchas veces se presentan problemas relacionados con que se tienen muchos empleados en tiendas donde la afluencia no es tan grande como se espera, o al mismo tiempo, puede darse el caso de que tengamos una organización de horarios que no se ajuste a la afluencia de gente de la tienda o que necesitemos en ciertas áreas contratar mas gente o mover personal de unas tiendas a otras para hacer un mejor reparto.
+Dentro de la grandes franquicias de hostelería se presenta un problema relacionado con la ocupación de sus diferentes tiendas. Tanto Macdonald's,KFC,Burguer King... suelen tener varias tiendas de su franquicia por ciudad, y muchas veces se da el caso de que hay tiendas que tienen mucha afluencia y otras con poca de manera que se producen colas que en general perjudican tanto a los clientes que tienen que hacer cola como a las empresas ya que tienen desajustes en su plantilla.
 
 
 ## Propuesta De Solución
 
-La solución que se propone en un inicio es la creación de un servicio web que permita a una franquicia registrar sus distintas tiendas y los empleados que tiene en cada tienda junto a sus horarios. A su vez, cada tienda dentro de su apartado va a ir registrando las compras que van teniendo, de manera que cada semana se va a ir generando por parte de la aplicación una serie de informes de ventas de cada tienda y el numero de empleados que tiene, generando una serie de tablas que nos indiquen las tiendas que tienen mayores ventas, tiendas con mayor desbalance  ventas/empleados y funciones a nivel global sobre zonas donde hay mayores ventas, franjas horarias de mayor venta a nivel global...
+La solución que se propone en un inicio es la creación de un servicio que permita a las franquicias inscribir sus distintas tiendas y poder añadir los usuarios que hay en el local a la aplicación (Bien cuando entran o cuando piden). Luego por otra parte los usuarios cuando quieran ir a comer simplemente buscan la franquicia a la que quieren ir y la ciudad donde estan y se les desplegará una serie de tiendas cercanas y la ocupación que tienen de manera que puede elegir donde ir segun la ocupación y su tiempo. Esto permitirá tanto a los clientes, poder ir al sitio con menor cola y no tener que esperar tanto tiempo, como a la empresa el poder tener un mayor reparto de ventas entre sus diferentes tiendas.
 
 
 ## Elementos Principales
