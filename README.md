@@ -11,5 +11,5 @@ La solución que se propone en un inicio es la creación de un servicio que perm
 ## Lógica De Negocio
 Nuestra aplicación va a procesar los diferentes datos de afluencia de las tiendas para poder mostrarlos en un mapa y proporcionar los mejores restaurantes a los que acudir en base a estos datos. A su vez servirá como herramienta de análisis para las franquicias para analizar que zonas son mas concurridas y como optimizar el personal y reducir costes.
 
-##Documentacion
-Configuración claves SSH --> 
+## Documentacion
+Configuración claves SSH -->
