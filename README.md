@@ -9,9 +9,8 @@ El problema como se ha comentado antes es la espera en colas de los clientes de 
 
 ## Enlaces Documentación
 
-- [Milestones](./doc/milestones.md)
-- [Historias De Usuario](./doc/User-Journeys.md)
-- [Configuración SSH](https://github.com/alvarogaro/AGR-MVS/blob/objetivo_0_AGR/images/clave-ssh-github.jpg)
+- [Milestones](./doc/Milestones.md)
+- [Historias De Usuario](./doc/Historias-Usuario.md)
 
 
 
