@@ -9,8 +9,8 @@ El problema como se ha comentado antes es la espera en colas de los clientes de 
 
 ## Enlaces Documentación
 
-- [Milestones](./doc/Milestones.md)
-- [Historias De Usuario](./doc/Historias-Usuario.md)
+- [Milestones](./docs/Milestones.md)
+- [Historias De Usuario](./docs/Historias-Usuario.md)
 
 
 
