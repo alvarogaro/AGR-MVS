@@ -9,7 +9,7 @@ class Empresa:
     
     # Getters #
 
-    # Método get para obtener el nombre de una tienda
+    # Método get para obtener el nombre de una empresa
     def getNombre (self):
         return self.nombre
 
