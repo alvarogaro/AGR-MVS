@@ -1,10 +1,5 @@
 lenguaje: python
 
-objeto valor:
-  - src/empresa.py
-  - src/empleado.py
-  - src/usuario.py
-
 entidad:
   - src/tienda.py
 
