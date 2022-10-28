@@ -7,7 +7,7 @@ class Empresa:
     nombre: str             # Nombre de la empresa
     listaTiendas: list      # Lista de Tiendas que pertenecen a esta empresa
     
-    # Getters #
+    # Getters (el resto se implementarán cuando sean necesarios) #
 
     # Método get para obtener las tiendas que pertenecen a la empresa
     def getListaTiendas (self):

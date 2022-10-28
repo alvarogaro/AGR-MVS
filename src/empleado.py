@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(frozen=True)
 class Empleado:
     ID: str             # ID única para cada empleado
     nombre: str         # Nombre completo del empleado
