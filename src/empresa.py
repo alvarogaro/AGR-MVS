@@ -9,10 +9,6 @@ class Empresa:
     
     # Getters #
 
-    # Método get para obtener el nombre de una empresa
-    def getNombre (self):
-        return self.nombre
-
     # Método get para obtener las tiendas que pertenecen a la empresa
     def getListaTiendas (self):
         return self.listaTiendas
