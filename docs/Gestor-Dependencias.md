@@ -16,18 +16,18 @@
 
 * Hatch: Analizando su [documentación oficial](https://hatch.pypa.io/latest/intro/) vemos como si hace uso de un fichero pyproject.toml para almacenar las dependencias,(Cumple con el PEP 518), ademas su estructura de ficheros es la recomendada por la buenas prácticas.
 
-* Poetry: Gestor de dependencias, igual que hatch hace uso de un fichero pyproject.toml, al igual que su estructura de ficheros es la recomendada por las buenas prácticas.
+* Poetry: Gestor de dependencias, igual que hatch hace uso de un fichero pyproject.toml, al igual que su estructura de ficheros es la recomendada por las buenas prácticas, mediante poetry, podemos agrupar los ficheros (Setup.py,requirements.txt,setup.cfg,MANIFES.in y Pipfile en un pyproject.toml, que además de seguir las buenas prácticas nos ayuda a reducir la deuda técnica).
 
 
 ## Poetry vs Hatch
 
 * Finalmente hemos descartado pipenv por no seguir las buenas prácticas y nos queda realizar una comparación entre Poetry y Hatch.
 
-* Poetry: Nos ofrece entornos virtuales de manera automática en la configuración, permite tener una mejor experiencia frente a árboles de dependencia complejos y tiene un uso eficiente de almacenamiento en la caché por tanto es bastante eficiente, posee un entorno virtual integrado  y facilita las actualizaciones de dependencias. Tiene como pro y como contra el uso de un solucionador de dependencias. Por una parte nos va a permitir manejar conflictos pero por otra parte es problemático [reporte de problemas](https://github.com/python-poetry/poetry/issues/4054)
+* Poetry: Nos ofrece entornos virtuales de manera automática en la configuración, permite tener una mejor experiencia frente a árboles de dependencia complejos y tiene un uso eficiente de almacenamiento en la caché por tanto es bastante eficiente, viendo su análisis en Snyk podemos ver que tiene una puntuación de 97, una gran popularidad y un mantenimiento activo.
 
-* Hatch: Se define como un manejador de proyectos con su propio manejador de dependencias. Hatch además incorporá funcionalidades como un sistema de test y herramientas para cobertura de código. Hatch como ventaja tiene que nos permite reducir el numero de herramientas que necesitamos en nuestro proyecto  pero lo malo es que al incluir un numero de herramientas tan alto, la curva de aprendizaje va a ser muy grande. 
+* Hatch: Se define como un manejador de proyectos con su propio manejador de dependencias. Hatch además incorporá funcionalidades como un sistema de test y herramientas para cobertura de código. Hatch como ventaja tiene que nos permite reducir el numero de herramientas que necesitamos en nuestro proyecto  pero lo malo es que al incluir un numero de herramientas tan alto, la curva de aprendizaje va a ser muy grande. Viendo su análisis en Snyk, podemos ver que es un proyecto con un mantenimiento activo y con bastante popularidad aunque mucho menor que poetry(Puntuación en Snyk de 85) . 
 
 
 ## Conclusión
 
-* Finalmente, debido a que nuestro proyecto no tiene unas grandes dimensiones, hemos optado por Poetry, debido a que su curva de aprendizaje es menor, es más eficiente, posee un entorno virtual integrado y facilita las actualizaciones.
+* Finalmente, hemos escogido Poetry como gestor de dependencias, ya que nos permite reducir la deuda técnica, es bastante sencillo a la hora de expresar dependencias y es el gestor con mayor puntuación en Snyk.
