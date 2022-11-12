@@ -4,4 +4,4 @@ entidad: src/tienda.py
 
 automatizar:
 	fichero: pyproject.toml
-  orden:   poe test 
+  orden:   poe ckeck 
