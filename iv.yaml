@@ -3,5 +3,5 @@ lenguaje: python
 entidad: src/tienda.py
 
 automatizar:
-	fichero: pyproject.toml
-  orden:   poe ckeck 
+  fichero: pyproject.toml
+  orden: poe check 
