@@ -20,12 +20,11 @@ pip install poetry
 poe install 
 ```
 
-* Para ejecutar los test tendremos que ejecutar el comando
+* Para la comprobación de la sintaxis tendremos que ejecutar el comando
 
 ```
 poe test
 ```
-
 
 
 ## Enlaces Documentación
