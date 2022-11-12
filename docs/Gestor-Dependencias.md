@@ -1,6 +1,6 @@
 # Elección Gestor De Dependencias
 
-* Como hemos planteado en el issue #12, va a ser necesario la elección de un gestor de dependencias para nuestro proyecto, esto es necesario ya que un gestor de dependencias nos va a permitir tener un proyecto con una mayor previsibilidad, sostenibilidad a lo largo del tiempo y seguridad.
+* Como hemos planteado en el issue [#12](https://github.com/alvarogaro/AGR-MVS/issues/12), va a ser necesario la elección de un gestor de dependencias para nuestro proyecto, esto es necesario ya que un gestor de dependencias nos va a permitir tener un proyecto con una mayor previsibilidad, sostenibilidad a lo largo del tiempo y seguridad.
 
 * Para la elección de nuestro gestor de dependencias, tenemos que basarnos en criterios objetivos y de las mejores prácticas del lenguaje que estemos utilizando en nuestro proyecto.
 
