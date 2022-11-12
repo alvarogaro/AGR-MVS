@@ -1,6 +1,6 @@
 # Elección Gestor De Tareas
 
-* En este documentos vamos a realizar un análisis de los Gestores de Tareas que hemos mencionado en el issue #13. Para este análisis vamos a tocar temas principalmente relacionados con el mantenimiento, seguridad, comunidad...
+* En este documentos vamos a realizar un análisis de los Gestores de Tareas que hemos mencionado en el issue [#13](https://github.com/alvarogaro/AGR-MVS/issues/13). Para este análisis vamos a tocar temas principalmente relacionados con el mantenimiento, seguridad, comunidad...
 
 * Los diferentes análisis de los gestores de tareas se van a obtener de la página web [Snyk](https://snyk.io/)
 
