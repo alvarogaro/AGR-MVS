@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "AGR-MVS"
+version = "0.0.4"
+description = "FRANCAPP Proyecto IV-22-23"
+authors = ["Alvaro García Rodríguez <alvarogaro@correo.ugr.es>"]
+license = "GPL-3.0-only"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "7.0"
+
+[tool.poetry.plugins."poetry.application.plugin"]
+poethepoet = "poethepoet.plugin:PoetryPlugin"
+
+# Automatización de Tareas
+[tool.poe.tasks]
+install = "poetry install"
+check = "poetry check"
+lock =  "poetry lock"
+test = "pytest -v tests/*.py"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
