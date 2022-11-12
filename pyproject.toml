@@ -22,9 +22,8 @@ poethepoet = "poethepoet.plugin:PoetryPlugin"
 # Automatización de Tareas
 [tool.poe.tasks]
 install = "poetry install"
-check = "poetry check"
 lock =  "poetry lock"
-test = "pytest -v tests/*.py"
+check = "pytest -v tests/*.py"
 
 
 [build-system]
