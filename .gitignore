@@ -127,5 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
 test/__pycache__
+.pytest_cache
+src/__pycache__
