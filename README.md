@@ -23,7 +23,7 @@ poe install
 * Para la comprobación de la sintaxis tendremos que ejecutar el comando
 
 ```
-poe check
+poe check 
 ```
 
 
