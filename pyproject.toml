@@ -10,8 +10,6 @@ readme = "README.md"
 python = "^3.8"
 poethepoet = "^0.16.4"
 
-[tool.poetry.group.dev.dependencies]
-pytest = "7.0"
 
 
 # plugin para añadir poethepoet como plugin a poetry
