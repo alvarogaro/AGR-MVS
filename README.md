@@ -14,7 +14,7 @@ El problema como se ha comentado antes es la espera en colas de los clientes de 
 ```
 pip install poetry
 ```
-* Luego para instalar nuestro proyecto simplemente tendremos que ejecutar el comando 
+* Luego para instalar las dependencias de nuestro proyecto simplemente tendremos que ejecutar el comando 
 
 ```
 poe install 

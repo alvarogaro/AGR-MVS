@@ -1,12 +1,12 @@
 # Elección Gestor De Dependencias
 
-* Como hemos planteado en el issue [#12](https://github.com/alvarogaro/AGR-MVS/issues/12), va a ser necesario la elección de un gestor de dependencias para nuestro proyecto, esto es necesario ya que un gestor de dependencias nos va a permitir tener un proyecto con una mayor previsibilidad, sostenibilidad a lo largo del tiempo y seguridad.
+* Como hemos planteado en el issue [#12](https://github.com/alvarogaro/AGR-MVS/issues/12), vamos a elegir un gestor de dependenciar
 
-* Para la elección de nuestro gestor de dependencias, tenemos que basarnos en criterios objetivos y de las mejores prácticas del lenguaje que estemos utilizando en nuestro proyecto.
+* Para la elección de nuestro gestor de dependencias, vamos a seguir una serie de criterios que  vienen recogidos en los denominados PEP (Python Enhancement Proposals), [Enlace a los PEP](https://peps.python.org/).
 
-* En nuestro caso, el lenguaje que vamos a utilizar es Python, por lo tanto las mejores prácticas y los criterios objetivos que sigue la comunidad vienen recogidos en los denominados PEP (Python Enhancement Proposals), [Enlace a los PEP](https://peps.python.org/).
-
-* En concreto, estamos tratando ahora la gestión de dependencias, por tanto vamos a seguir las recomendaciones que vienen recogidas en los PEP [517](https://peps.python.org/pep-0517/), [518](https://peps.python.org/pep-0518/) y [621](https://peps.python.org/pep-0621).
+* En concreto, estamos tratando ahora la gestión de dependencias, por tanto vamos a seguir las recomendaciones que vienen recogidas en los PEP [517](https://peps.python.org/pep-0517/), [518](https://peps.python.org/pep-0518/) y [621](https://peps.python.org/pep-0621) además de contemplar la posibilidad de integración de estos gestores de dependencias con algun gestor de tareas.
+  
+* Adicionalmente a los criterios anteriormente mencionados, vamos a tener en cuenta el análisis que se hace  de estos gestores en [Synk](https://snyk.io/), en concreto nos vamos a fijar en su puntuación global, popularidad y mantenimiento.
 
 ## Comparativa Gestores De Dependencias.
 
@@ -16,6 +16,7 @@
 
 * Poetry: Gestor de dependencias, igual que como hemos hecho con Hatch, vemos que cumple los PEP mencionados anteriormente.
 
+* Guiandonos por los criterios recogidos en los PEP, nos encontramos con dos Gestores de Dependencias que cumplen estos requisitos, que son [Poetry](https://python-poetry.org/) y [Hatch](https://hatch.pypa.io/latest/intro/)
 
 ## Poetry vs Hatch
 
