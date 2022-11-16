@@ -21,7 +21,7 @@ poethepoet = "poethepoet.plugin:PoetryPlugin"
 [tool.poe.tasks]
 install = "poetry install"
 lock =  "poetry lock"
-check = "pytest -v tests/*.py"
+check = "python -m compileall src"
 
 
 [build-system]
