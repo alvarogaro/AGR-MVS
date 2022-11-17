@@ -8,19 +8,11 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-poethepoet = "^0.16.4"
-
-
-
-# plugin para añadir poethepoet como plugin a poetry
-
-[tool.poetry.plugins."poetry.application.plugin"]
-poethepoet = "poethepoet.plugin:PoetryPlugin"
 
 # Automatización de Tareas
+
 [tool.poe.tasks]
 install = "poetry install"
-lock =  "poetry lock"
 check = "python -m compileall src"
 
 
