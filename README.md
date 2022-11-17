@@ -9,15 +9,20 @@ El problema como se ha comentado antes es la espera en colas de los clientes de 
 
 ## Instalación y Test
 
-* Para instalar poetry simplemente tendremos que ejecutar el comando 
-
+* Para instalar poetry dentro de nuestro entorno global, ejecutamos el siguiente comando:
 ```
 pip install poetry
 ```
-* Luego para instalar las dependencias de nuestro proyecto simplemente tendremos que ejecutar el comando 
+* Para instalar poethepoet dentro del entorno global, ejecutamos el siguiente comando
 
 ```
-poe install 
+pip install poethepoet
+```
+
+* Para la creación del entorno virtual e instalación de las dependencias ejecutamos el comando:
+
+```
+poe install
 ```
 
 * Para la comprobación de la sintaxis tendremos que ejecutar el comando
