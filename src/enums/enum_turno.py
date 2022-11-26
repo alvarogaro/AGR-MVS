@@ -3,6 +3,5 @@
 from enum import Enum
 
 class Turno (Enum):
-    MANIANA = 1
-    TARDE = 2
-    NOCHE = 3
+    ALMUERZO = 1
+    CENA = 2
