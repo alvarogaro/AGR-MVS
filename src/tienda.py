@@ -1,15 +1,14 @@
 # Clase Tienda (entidad que representa cada Tienda de nuestra aplicación)
 
 from src.empresa import Empresa
-from src.empleado import Empleado
-from src.enums.enum_turno import Turno
+from src.Turno import Turno
 
 class Tienda:
+    # Nombre de la Tienda, Empresa para establecer el dato
+    id: int                         # Identificador de la tienda
     nombre: str                     # Nombre de la tienda
     empresa: Empresa                # Empresa a la que pertenece la tienda
-    ubicacion: str                  # Ubicación de la tienda
-    turnos: dict(Empleado,Turno)    # Diccionario que guarda pares de personas y turnos asignados.
-    pedidosTurno: dict(Turno,int)   # Diccionario que guarda turnos y pedidos que se han hecho en ese turno.
+    turno: Turno                    # Turn
 
     # Getters (el resto se implementarán cuando sean necesarios) #
 

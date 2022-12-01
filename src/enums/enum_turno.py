@@ -2,6 +2,6 @@
 
 from enum import Enum
 
-class Turno (Enum):
+class TipoTurno (Enum):
     ALMUERZO = 1
     CENA = 2
