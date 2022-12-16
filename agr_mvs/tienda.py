@@ -1,14 +1,15 @@
 # Clase Tienda (entidad que representa cada Tienda de nuestra aplicación)
 
-from empresa import Empresa
-from Turno import Turno
+from agr_mvs.empresa import Empresa
+from agr_mvs.Turno import Turno
 
 class Tienda:
     # Nombre de la Tienda, Empresa para establecer el dato
     id: int                         # Identificador de la tienda
     nombre: str                     # Nombre de la tienda
     empresa: Empresa                # Empresa a la que pertenece la tienda
-    turnos: list                   # Turnos de la tienda
+    turnos: list                    # Turnos de la tienda
+    p: float                        # Saturacion de la tienda
 
     # Getters (el resto se implementarán cuando sean necesarios) #
     def __init__(self, id, nombre, empresa):
