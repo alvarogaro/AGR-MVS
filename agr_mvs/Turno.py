@@ -1,31 +1,25 @@
 from datetime import datetime
-from enums.enum_turno import TipoTurno
-from Ticket import Ticket
-# DUDAS:
-# Como expresar la longitud del turno que es 5'5 horas siempre
-# Como hacer los test
-# Cambios en la Estructura de pablo ( Reflejado en un issue.)
+from agr_mvs.enum_turno import TipoTurno
+from agr_mvs.Ticket import Ticket
+import math
 
+# Constante que nos expresa la longitud del turno que es 5'5 horas.
+# Se considera que un cliente no debe de esperar mas de 30 minutos en la cola de un restaurante
 HORAS_TURNO = 5.5
+MAX_TIEMPO_COLA = 30
 
 class Turno:
-    # Nombre de la Turno, Empresa para establecer el dato
-    # La longitud de un Turno es: 5'5 horas
-    # λ: Tasa media de llegada de clientes: Lo vamos a calcular mediante el numero de clientes que llegan y las horas que tenemos en el turno (5'5)
-    # Se obtiene mediante registros de las cámaras y se hace una media.
-    id: str                         # Identificador del Turno
-    # Los Turnos se dividen en dos tipos, almuerzos(1), Cenas(2)
-    Tipo_turno: TipoTurno
+    id: str                      # Identificador del Turno
+    Tipo_turno: TipoTurno        # Tipo de Turno (Almuerzo o Cena)
     Tickets: list                # Tickets dentro de un Turno.
-    Fecha:  datetime
-    # Clientes atendidos por unidad de Tiempo (Calculado con importe de los tickets)
-    µ: float
-    λ: float                       # Clientes que llegan por unidad de Tiempo
-    # Numero de Máquinas TPV en funcionamiento en el Turno. (Similar a Número de Servidores)
-    S: float
+    Fecha:  datetime             # Fecha del Turno
+    µ: float                     # Clientes que son atendidos por unidad de tiempo (hora)
+    λ: float                     # Clientes que llegan por unidad de tiempo (hora)
+    S: float                     # Numero de TPV que tenemos disponibles (Nos los aporta la tienda como dato)           
+            
 
     # Inicializamos Todos los Datos del Turno (Numero de máquinas disponibles, Tipo_Turno y id del Turno ), excepto los calculados y los Tickets
-    def __init__(self, id, Tipo_turno, S, Fecha, µ=None, λ=None):
+    def __init__(self, id, Tipo_turno, S, Fecha, µ=None, λ=None, p=None):
         self.id = id
         self.Tipo_turno = Tipo_turno
         self.Fecha = Fecha
@@ -53,7 +47,7 @@ class Turno:
                 if (ticket.fecha_ticket.hour >= 13 and ticket.fecha_ticket.hour <= 18):
                     self.Tickets.append(ticket)
             elif(self.Tipo_turno == TipoTurno.CENA):
-                if (ticket.fecha_ticket.hour >= 18 and ticket.fecha_ticket.hour <= 23):
+                if (ticket.fecha_ticket.hour > 18 and ticket.fecha_ticket.hour <= 23):
                     self.Tickets.append(ticket)
         else:
             raise Exception("El Ticket no pertenece al Turno")
@@ -83,12 +77,14 @@ class Turno:
 
     def getS(self):
         return self.S
+    
+    def getp(self):
+        return self.p
 
       # Método para calcular el µ
     '''
-   Para el cálculo de µ simplificaremos el problema y lo calcularemos teniendo en cuenta la hora del turno con mayor afluencia, y ese va a ser el valor.
+    Para el cálculo del µ, se ha decidido que el valor de µ será el máximo de clientes que se han atendido en una hora.
     '''
-
     def calculo_µ(self):
         max_afluencia = 0
         afluencia = 0
@@ -120,10 +116,65 @@ class Turno:
             self.µ = max_afluencia
 
     '''
-    Cuando calculamos λ vamos a hacer una simplificación del problema por tanto se va a realizar una media entre las horas que tiene un 
-    turno y el numero de ventas que hemos tenido.
+    Para el calculo de λ debemos de tener en cuenta que lo hacemos por hora,
+    con fin de simplificar el cálculo, vamos a realizar una división entre el numero de tickets 
+    que tenemos en el turno y las horas del turno. (Representamos cada cliente por un ticket sin valorare el importe del ticket)
     '''
-
     def calculo_λ(self):
-        print("Holaaaaaaaaa",len(self.Tickets))
         self.λ = len(self.Tickets)/HORAS_TURNO
+    
+    '''
+    Calculo variables elementales para el calculo de las variables estadísticas
+    '''
+    def calculo_variables_elementales(self):
+        if (self.µ == None or self.λ == None):
+            self.calculo_µ()
+            self.calculo_λ()
+    
+    '''
+    Mediante esta funcion vamos a poder calcular la saturacion de la tienda.
+    '''
+    def calculo_p(self):
+        self.calculo_variables_elementales()
+        p = self.λ/(self.µ*self.S)
+        return p
+    
+    
+    '''
+    Calculo del numero promedio de clientes en la cola: Lq = p / Ls (Siendo Ls el numero promedio de clientes que entran al sistema)
+    Ls = λ / (µ - λ)
+    '''
+    def calculo_L(self):
+        p = self.calculo_p()
+        l = p * (self.λ / (self.µ - self.λ))
+        return l
+
+    '''
+    Calculo del tiempo promedio de espera de un cliente en la cola Wq = Lq/λ
+    '''
+    
+    def calculo_W(self):
+        self.calculo_variables_elementales()
+        w = self.λ / (self.µ * (self.µ - self.λ))
+        return w
+
+    '''
+    Mediante este calculo vamos a poder obtener la probabilidad de que un cliente tenga que esperar en la cola mas de 30 minutos
+    que es el tiempo a partir del cual se considera que podemos perder clientes. la formula es: p * e^(-µ*(1-p)*t) 
+    '''
+    def calculo_P_Cola(self):
+        p = self.calculo_p()
+        exp = (-self.µ * (1 - p) * 30)
+        p_cola = p * math.exp(exp)
+        return p_cola
+    
+    def calculo_variables_estadísticas(self):
+        print("La saturacion de la tienda es: "+ str(self.calculo_p()))
+        print("El numero promedio de clientes en la cola es de : "+ str(self.calculo_L()))
+        print("El tiempo promedio de espera de un cliente en la cola es de : "+ str(self.calculo_W()))
+        print("La probabilidad de que un cliente espere en la cola mas de 30 minutos es de: "+ str(self.calculo_P_Cola()))
+        
+        
+
+        
+        
