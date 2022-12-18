@@ -167,9 +167,9 @@ class Turno:
     que es el tiempo a partir del cual se considera que podemos perder clientes. la formula es: p * e^(-µ*(1-p)*t). En este caso
     vamos a expresar el parámetro µ en minutos para que el resultado que arroje se base en minutos y no en horas. 
     '''
-    def calculo_P_Cola(self):
+    def calculo_P_Cola(self,minutos):
         p = self.calculo_p()
-        exp = (-self.µ * (1 - p) * 30)
+        exp = (-self.µ * (1 - p) * minutos)
         p_cola = p * math.exp(exp)
         return p_cola
     
@@ -177,7 +177,7 @@ class Turno:
         print("La saturacion de la tienda es: "+ str(self.calculo_p()))
         print("El numero promedio de clientes en la cola es de : " + str(self.calculo_L()))
         print("El tiempo promedio de espera de un cliente en la cola es de : "+ str(self.calculo_W())+ " minutos")
-        print("La probabilidad de que un cliente espere en la cola mas de 30 minutos es de: "+ str(self.calculo_P_Cola()))
+        print("La probabilidad de que un cliente espere en la cola mas de 30 minutos es de: "+ str(self.calculo_P_Cola(30)))
         
         
 
