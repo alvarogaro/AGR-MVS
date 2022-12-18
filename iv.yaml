@@ -4,4 +4,7 @@ entidad: src/tienda.py
 
 automatizar:
   fichero: pyproject.toml
-  orden: poe  
+  orden: poe
+
+test:
+  - tests/test_agr_mvs.py
