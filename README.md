@@ -30,6 +30,11 @@ poe install
 ```
 poe check 
 ```
+* Realización de los test
+
+```
+poe test
+```
 
 
 ## Enlaces Documentación
@@ -39,6 +44,8 @@ poe check
 - [Gestor De Dependencias](./docs/Gestor-Dependencias.md)
 - [Gestor De Tareas](./docs/Gestor-Tareas.md)
 - [Test Runner](./docs/Test-Runner.md)
+- [Biblioteca Aserciones](./docs/Biblioteca-Aserciones.md)
+
 
 
 
