@@ -8,12 +8,15 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+pyhamcrest = "^2.0.4"
+pytest = "^7.2.0"
 
 # Automatización de Tareas
 
 [tool.poe.tasks]
 install = "poetry install"
 check = "python -m compileall src"
+test = "poetry run pytest -v tests/test_agr_mvs.py"
 
 
 [build-system]
