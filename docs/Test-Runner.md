@@ -4,7 +4,7 @@ Como se ha comentado en el issue [#19](https://github.com/alvarogaro/AGR-MVS/iss
 
 * Pytest: Es uno de los Test-Runner mas populares de Python con una gran comunidad de mantenimiento, tiene un 97 de puntuación en Snyk, no hace uso de entornos virtuales para la realización de los test.
 
-* Nose2: Tiene una gran comunidad de mantenimiento y cierta popularidad. En Snyk, obtiene una puntuación de 85, no hace uso de entornos virtuales para la realización de los test
+* Nose2: Tiene una gran comunidad de mantenimiento y cierta popularidad. En Snyk, obtiene una puntuación de 85, no hace uso de entornos virtuales para la realización de los test.
 
 
 * Finalmente, tras la evaluación de estos Test-Runners, nos vamos a decantar por Pytest debido a que obtiene la mayor puntuación en Snyk.
