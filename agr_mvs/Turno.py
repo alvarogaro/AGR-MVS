@@ -42,15 +42,16 @@ class Turno:
         return cadena
     # Añadimos un Ticket a la lista de Tickets del Turno
     def addTicket(self, ticket):
-        if (self.Fecha.date() == ticket.fecha_ticket.date()):
-            if (self.Tipo_turno == TipoTurno.ALMUERZO):
-                if (ticket.fecha_ticket.hour >= 13 and ticket.fecha_ticket.hour <= 18):
-                    self.Tickets.append(ticket)
-            elif(self.Tipo_turno == TipoTurno.CENA):
-                if (ticket.fecha_ticket.hour > 18 and ticket.fecha_ticket.hour <= 23):
-                    self.Tickets.append(ticket)
-        else:
-            raise Exception("El Ticket no pertenece al Turno")
+            if (self.Fecha.date() == ticket.fecha_ticket.date()):
+                if (self.Tipo_turno == TipoTurno.ALMUERZO):
+                    if (ticket.fecha_ticket.hour >= 13 and ticket.fecha_ticket.hour <= 18):
+                        self.Tickets.append(ticket)
+                elif(self.Tipo_turno == TipoTurno.CENA):
+                    if (ticket.fecha_ticket.hour > 18 and ticket.fecha_ticket.hour <= 23):
+                        self.Tickets.append(ticket)
+            else:
+                # Excepción del tipo IndexError en caso de que no se pueda añadir el Ticket
+                raise IndexError("El Ticket no pertenece al Turno")
             
             
 
@@ -84,6 +85,7 @@ class Turno:
       # Método para calcular el µ
     '''
     Para el cálculo del µ, se ha decidido que el valor de µ será el máximo de clientes que se han atendido en una hora.
+    Se va a dividir entre 60 para trabajar con minutos en los posteriores cálculos.
     '''
     def calculo_µ(self):
         max_afluencia = 0
@@ -94,34 +96,35 @@ class Turno:
             while (hora_actual <= hora_fin):
                 for ticket in self.Tickets:
                     hora = ticket.fecha_ticket.hour
-                    print(hora)
                     if (hora == hora_actual):
                         afluencia += 1
                 if (afluencia > max_afluencia):
                     max_afluencia = afluencia
                 hora_actual += 1
                 afluencia = 0
-            self.µ = max_afluencia
+            self.µ = (max_afluencia/60.0)
         else:
             hora_actual = 18
             hora_fin = 23
             while (hora_actual <= hora_fin):
                 for ticket in self.Tickets:
-                    if (ticket.fecha_ticket.hour() == hora_actual):
+                    hora = ticket.fecha_ticket.hour
+                    if (hora == hora_actual):
                         afluencia += 1
                 if (afluencia > max_afluencia):
-                    print(afluencia)
                     max_afluencia = afluencia
                 hora_actual += 1
-            self.µ = max_afluencia
+                afluencia = 0
+            self.µ = (max_afluencia/60.0)
 
     '''
     Para el calculo de λ debemos de tener en cuenta que lo hacemos por hora,
     con fin de simplificar el cálculo, vamos a realizar una división entre el numero de tickets 
     que tenemos en el turno y las horas del turno. (Representamos cada cliente por un ticket sin valorare el importe del ticket)
+    El resultado lo vamos a dividir entre 60 para trabajar con minutos en los posteriores cálculos.
     '''
     def calculo_λ(self):
-        self.λ = len(self.Tickets)/HORAS_TURNO
+        self.λ = (len(self.Tickets)/HORAS_TURNO)/60.0
     
     '''
     Calculo variables elementales para el calculo de las variables estadísticas
@@ -150,17 +153,19 @@ class Turno:
         return l
 
     '''
-    Calculo del tiempo promedio de espera de un cliente en la cola Wq = Lq/λ
+    Calculo del tiempo promedio de espera de un cliente en la cola Wq = Lq/λ ( Vamos a expresar λ en minutos para que sea mas orientativo el resultado) 
     '''
     
     def calculo_W(self):
         self.calculo_variables_elementales()
-        w = self.λ / (self.µ * (self.µ - self.λ))
+        Lq = self.calculo_L()
+        w = Lq / self.λ
         return w
 
     '''
     Mediante este calculo vamos a poder obtener la probabilidad de que un cliente tenga que esperar en la cola mas de 30 minutos
-    que es el tiempo a partir del cual se considera que podemos perder clientes. la formula es: p * e^(-µ*(1-p)*t) 
+    que es el tiempo a partir del cual se considera que podemos perder clientes. la formula es: p * e^(-µ*(1-p)*t). En este caso
+    vamos a expresar el parámetro µ en minutos para que el resultado que arroje se base en minutos y no en horas. 
     '''
     def calculo_P_Cola(self):
         p = self.calculo_p()
@@ -170,8 +175,8 @@ class Turno:
     
     def calculo_variables_estadísticas(self):
         print("La saturacion de la tienda es: "+ str(self.calculo_p()))
-        print("El numero promedio de clientes en la cola es de : "+ str(self.calculo_L()))
-        print("El tiempo promedio de espera de un cliente en la cola es de : "+ str(self.calculo_W()))
+        print("El numero promedio de clientes en la cola es de : " + str(self.calculo_L()))
+        print("El tiempo promedio de espera de un cliente en la cola es de : "+ str(self.calculo_W())+ " minutos")
         print("La probabilidad de que un cliente espere en la cola mas de 30 minutos es de: "+ str(self.calculo_P_Cola()))
         
         
