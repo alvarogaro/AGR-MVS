@@ -1,4 +1,6 @@
-
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from agr_mvs.enum_turno import TipoTurno
 from agr_mvs.empresa import Empresa
 from agr_mvs.tienda import Tienda
@@ -7,10 +9,6 @@ from agr_mvs.Ticket import Ticket
 from hamcrest import *
 import pytest
 from datetime import datetime
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 
 empresa = Empresa("NRSUR")
 tienda = Tienda(1, "KFC", empresa)
@@ -115,30 +113,40 @@ def test_calculo_µ():
 '''
 Todos los cálculos que vienen a continuación se van a realizar teniendo en cuenta que λ va a ser 0'2 clientes/minuto, µ va a ser 0'25 clientes/minuto
 y que el numero de servidores que vamos a tener es 1. Tal y como se refleja en el enunciado del ejercicio que se ha especificado en el issue #22 
+
 '''
-turno1.λ = 0.2
-turno1.µ = 0.25
-turno1.S = 1
+
 '''
 Test para comprobar la saturación
 '''
-
 def test_calculo_p():
-    turno1.calculo_p()
-    assert_that(turno1.getp(), close_to(0.8, 0.1))
+    turno1.λ = 0.2
+    turno1.µ = 0.25
+    turno1.S = 1
+    print(turno1)
+    p = turno1.calculo_p()
+    assert_that(p, close_to(0.8, 0.1))
 
-# def test_λ():
-#     turno1.calculo_λ()
-#     assert turno1.getλ() >= 0.25
+'''
+Calculo del numero promedio de clientes en la cola
+'''
+def test_calculo_Lq():
+    Lq = turno1.calculo_L()
+    assert_that(Lq, close_to(3.2, 0.1))
 
-# turno1.μ = 15
-# turno1.λ = 12
-# turno1.calculo_variables_estadísticas()
-# turno2.calculo_variables_estadísticas()
-# print("El μ es: ", turno1.getμ())
-# print("El λ es: ", turno1.getλ())
-# print(turno1)
-# print(turno2)
-# print(len(turno1.Tickets))
+'''
+Calculo del tiempo promedio de espera de un cliente en la cola
+'''
+def test_calculo_W():
+    Wq = turno1.calculo_W()
+    assert_that(Wq, close_to(16, 0.1))
+    
+'''
+Calculo de la probabilidad de que un cliente espere en la cola mas de 25 minutos.
+'''
 
-# turno1.addTicket(ticket3)
+def test_calculo_p_cola():
+    Wq = turno1.calculo_P_Cola(25)
+    assert_that(Wq, close_to(0.23, 0.1))
+
+
