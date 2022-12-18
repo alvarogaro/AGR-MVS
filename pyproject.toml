@@ -8,6 +8,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+pyhamcrest = "^2.0.4"
+pytest = "^7.2.0"
 
 # Dependencias para el desarrollo
 [tool.poetry.dev-dependencies]
