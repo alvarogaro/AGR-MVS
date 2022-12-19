@@ -4,8 +4,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from agr_mvs.enum_turno import TipoTurno
 from agr_mvs.empresa import Empresa
 from agr_mvs.tienda import Tienda
-from agr_mvs.Turno import Turno
-from agr_mvs.Ticket import Ticket
+from agr_mvs.turno import Turno
+from agr_mvs.ticket import Ticket
 from hamcrest import *
 import pytest
 from datetime import datetime

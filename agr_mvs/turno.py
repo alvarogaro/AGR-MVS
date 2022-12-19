@@ -1,6 +1,6 @@
 from datetime import datetime
 from agr_mvs.enum_turno import TipoTurno
-from agr_mvs.Ticket import Ticket
+from agr_mvs.ticket import Ticket
 import math
 
 # Constante que nos expresa la longitud del turno que es 5'5 horas.
@@ -67,14 +67,11 @@ class Turno:
     def getTurnos(self):
         return self.turnos
 
-    # Método para obtener el µ
     def getµ(self):
         return self.µ
-    # Método para obtener el λ
 
     def getλ(self):
         return self.λ
-    # Método para obtener el numero de Servidores (S)
 
     def getS(self):
         return self.S
@@ -82,7 +79,6 @@ class Turno:
     def getp(self):
         return self.p
 
-      # Método para calcular el µ
     '''
     Para el cálculo del µ, se ha decidido que el valor de µ será el máximo de clientes que se han atendido en una hora.
     Se va a dividir entre 60 para trabajar con minutos en los posteriores cálculos.
