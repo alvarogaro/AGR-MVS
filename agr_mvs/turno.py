@@ -133,47 +133,47 @@ class Turno:
     '''
     Mediante esta funcion vamos a poder calcular la saturacion de la tienda.
     '''
-    def calculo_p(self):
+    def calculo_saturacion(self):
         self.calculo_variables_elementales()
-        p = self.λ/(self.µ*self.S)
-        return p
+        saturacion = self.λ/(self.µ*self.S)
+        return saturacion
     
     
     '''
     Calculo del numero promedio de clientes en la cola: Lq = p / Ls (Siendo Ls el numero promedio de clientes que entran al sistema)
     Ls = λ / (µ - λ)
     '''
-    def calculo_L(self):
-        p = self.calculo_p()
-        l = p * (self.λ / (self.µ - self.λ))
-        return l
+    def calculo_promedio_clientes_cola(self):
+        saturacion = self.calculo_saturacion()
+        promedio_clientes = saturacion * (self.λ / (self.µ - self.λ))
+        return promedio_clientes
 
     '''
     Calculo del tiempo promedio de espera de un cliente en la cola Wq = Lq/λ ( Vamos a expresar λ en minutos para que sea mas orientativo el resultado) 
     '''
     
-    def calculo_W(self):
+    def calculo_tiempo_espera_cola(self):
         self.calculo_variables_elementales()
-        Lq = self.calculo_L()
-        w = Lq / self.λ
-        return w
+        promedio_clientes = self.calculo_promedio_clientes_cola()
+        tiempo_espera_cola = promedio_clientes / self.λ
+        return tiempo_espera_cola
 
     '''
     Mediante este calculo vamos a poder obtener la probabilidad de que un cliente tenga que esperar en la cola mas de 30 minutos
     que es el tiempo a partir del cual se considera que podemos perder clientes. la formula es: p * e^(-µ*(1-p)*t). En este caso
     vamos a expresar el parámetro µ en minutos para que el resultado que arroje se base en minutos y no en horas. 
     '''
-    def calculo_P_Cola(self,minutos):
-        p = self.calculo_p()
-        exp = (-self.µ * (1 - p) * minutos)
-        p_cola = p * math.exp(exp)
-        return p_cola
+    def calculo_probabilidad_espera_cola(self,minutos):
+        saturacion = self.calculo_saturacion()
+        exp = (-self.µ * (1 - saturacion) * minutos)
+        probabilidad_cola = saturacion * math.exp(exp)
+        return probabilidad_cola
     
-    def calculo_variables_estadísticas(self):
-        print("La saturacion de la tienda es: "+ str(self.calculo_p()))
-        print("El numero promedio de clientes en la cola es de : " + str(self.calculo_L()))
-        print("El tiempo promedio de espera de un cliente en la cola es de : "+ str(self.calculo_W())+ " minutos")
-        print("La probabilidad de que un cliente espere en la cola mas de 30 minutos es de: "+ str(self.calculo_P_Cola(30)))
+    def calculo_variables_estadísticas():
+        print("La saturacion de la tienda es: "+ str(Turno.calculo_saturacion()))
+        print("El numero promedio de clientes en la cola es de : " + str(Turno.calculo_promedio_clientes_cola()))
+        print("El tiempo promedio de espera de un cliente en la cola es de : "+ str(Turno.calculo_tiempo_espera_cola())+ " minutos")
+        print("La probabilidad de que un cliente espere en la cola mas de 30 minutos es de: "+ str(Turno.calculo_probabilidad_espera_cola(30)))
         
         
 
