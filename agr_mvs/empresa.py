@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass
 class Empresa:
     nombre: str             # Nombre de la empresa
-    listaTiendas: list      # Lista de Tiendas que pertenecen a esta empresa
+    ListaTiendas: list      # Lista de Tiendas que pertenecen a esta empresa
     
     # Getters (el resto se implementarán cuando sean necesarios) #
     
