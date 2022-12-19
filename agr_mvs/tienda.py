@@ -8,20 +8,16 @@ class Tienda:
 
     # Getters (el resto se implementarán cuando sean necesarios) #
     def __init__(self, nombre):
-        self.nombre = nombre
-        self.turnos = []
+        self.Nombre = nombre
+        self.Turnos = []
         
     def add_Turno(self, turno):
-        self.turnos.append(turno)
+        self.Turnos.append(turno)
     
-    # Método get para obtener el nombre de una tienda
+    # Método get para obtener el Nombre de una tienda
     def getNombre (self):
-        return self.nombre
+        return self.Nombre
 
-    # Método get para obtener la empresa a la que pertenece la tienda
-    def getEmpresa (self):
-        return self.empresa
-
-    # Método get para obtener los turnos asignados
+    # Método get para obtener los Turnos asignados
     def getTurnos (self):
-        return self.turnos
+        return self.Turnos
