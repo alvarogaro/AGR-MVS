@@ -1,13 +1,9 @@
 # Clase Tienda (entidad que representa cada Tienda de nuestra aplicación)
-
-from agr_mvs.empresa import Empresa
 from agr_mvs.turno import Turno
 
 class Tienda:
     # Nombre de la Tienda, Empresa para establecer el dato
-    Id: int                         # Identificador de la tienda
-    Nombre: str                     # Nombre de la tienda
-    Empresa: Empresa                # Empresa a la que pertenece la tienda
+    Nombre: str                     # Nombre de la tienda        
     Turnos: list                    # Turnos de la tienda
 
     # Getters (el resto se implementarán cuando sean necesarios) #
