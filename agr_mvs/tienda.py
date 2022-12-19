@@ -7,10 +7,8 @@ class Tienda:
     Turnos: list                    # Turnos de la tienda
 
     # Getters (el resto se implementarán cuando sean necesarios) #
-    def __init__(self, id, nombre, empresa):
-        self.id = id
+    def __init__(self, nombre):
         self.nombre = nombre
-        self.empresa = empresa
         self.turnos = []
         
     def add_Turno(self, turno):

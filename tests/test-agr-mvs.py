@@ -1,8 +1,7 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from agr_mvs.enum_turno import TipoTurno
-from agr_mvs.empresa import Empresa
+from agr_mvs.enumturno import TipoTurno
 from agr_mvs.tienda import Tienda
 from agr_mvs.turno import Turno
 from agr_mvs.ticket import Ticket
@@ -10,8 +9,7 @@ from hamcrest import *
 import pytest
 from datetime import datetime
 
-empresa = Empresa("NRSUR")
-tienda = Tienda(1, "KFC", empresa)
+tienda = Tienda("KFC")
 turno1 = Turno(1, TipoTurno.ALMUERZO, 3.0, datetime(2020, 12, 12, 00, 00))
 turno2 = Turno(2, TipoTurno.CENA, 3, datetime(2020, 12, 12, 00, 00))
 ticket = []
