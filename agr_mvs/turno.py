@@ -7,7 +7,7 @@ HORAS_TURNO = 5.5
 
 class Turno:
     Id: int                      # Identificador del Turno
-    Horas_Turno: list  # Mediante este array introducimos dos datetime que nos indican el inicio y el fin del turno
+    Horas_Turno: list            # Mediante este array introducimos dos datetime que nos indican el inicio y el fin del turno
     Tickets: list                # Tickets dentro de un Turno.
     Fecha:  datetime             # Fecha del Turno
     µ: float                     # Clientes que son atendidos por unidad de tiempo (hora)
@@ -15,7 +15,7 @@ class Turno:
     S: float                     # Numero de TPV que tenemos disponibles (Nos los aporta la tienda como dato)           
             
 
-    # Inicializamos Todos los Datos del Turno (Numero de máquinas disponibles, Tipo_Turno y id del Turno ), excepto los calculados y los Tickets
+    
     def __init__(self, id, horas_turno, S, Fecha, µ=None, λ=None, p=None):
         self.Id = id
         self.Horas_Turno = horas_turno
@@ -48,11 +48,7 @@ class Turno:
             
     # Método get para obtener el nombre de una tienda
     def getNombre(self):
-        return self.nombre
-    # Método get para obtener los turnos asignados
-    def getTurnos(self):
-        return self.turnos
-
+        return self.Nombre
     def getµ(self):
         return self.µ
 
