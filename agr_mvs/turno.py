@@ -31,7 +31,24 @@ class Turno:
         else:
             # Excepción del tipo IndexError en caso de que no se pueda añadir el Ticket
             raise IndexError("El Ticket no pertenece al Turno")
+<<<<<<< HEAD
         
+=======
+            
+    # Método get para obtener el nombre de una tienda
+    def getNombre(self):
+        return self.Nombre
+    
+    def getµ(self):
+        return self.µ
+
+    def getλ(self):
+        return self.λ
+
+    def getS(self):
+        return self.S
+
+>>>>>>> 8f7784c (añadido unittest #21)
     '''
     Para el cálculo del µ, se ha decidido que el valor de µ será el máximo de clientes que se han atendido en una hora.
     Vamos pasando por las distintas horas del turno y viendo la afluencia que ha habido en cada hora para quedarnos con la 

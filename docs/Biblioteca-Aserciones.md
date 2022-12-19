@@ -9,6 +9,9 @@
 * [Assertpy](https://snyk.io/advisor/python/assertpy): Esta librería de Aserciones tiene una puntuación de 66 en Snyk, tiene la capacidad de tener una buena integración con pytest,
 
 * [PyHamcrest](https://snyk.io/advisor/python/pyhamcrest): Framework para matchers, mediante esta biblioteca tenemos una muy amplia gama de funcionalidades para probar "UI validations", filtrado de datos... Esta característica permite tener test legibles, limpios y de un alto valor. Tiene una puntuación en Snyk de 85, es una herramienta con un desarrollo activo y alta popularidad
+  
+* [Unittest](https://snyk.io/advisor/python/unittest): Esta librería de Aserciones es la que viene por defecto con python, tiene una puntuación de 37 en Snyk, lleva tiempo sin recibir actualizaciones y tiene una baja popularidad. Es una librería estándar de python y por tanto forma parte del core de python
+
 
 * Tras haber evaluado las herramientas anteriores, y haciendo un balance de los criterios anteriormente mencionados, vemos que la herramienta mas "completa" es PyHamcrest, debido a una alta puntuación junto con su gran funcionalidad para crear test con gran funcionalidad y limpieza.
 
