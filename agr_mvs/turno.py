@@ -1,16 +1,13 @@
 from datetime import datetime
-from agr_mvs.enum_turno import TipoTurno
 from agr_mvs.ticket import Ticket
 import math
 
 # Constante que nos expresa la longitud del turno que es 5'5 horas.
-# Se considera que un cliente no debe de esperar mas de 30 minutos en la cola de un restaurante
 HORAS_TURNO = 5.5
-MAX_TIEMPO_COLA = 30
 
 class Turno:
-    id: str                      # Identificador del Turno
-    Tipo_turno: TipoTurno        # Tipo de Turno (Almuerzo o Cena)
+    Id: int                      # Identificador del Turno
+    Horas_Turno: list  # Mediante este array introducimos dos datetime que nos indican el inicio y el fin del turno
     Tickets: list                # Tickets dentro de un Turno.
     Fecha:  datetime             # Fecha del Turno
     µ: float                     # Clientes que son atendidos por unidad de tiempo (hora)
@@ -19,9 +16,9 @@ class Turno:
             
 
     # Inicializamos Todos los Datos del Turno (Numero de máquinas disponibles, Tipo_Turno y id del Turno ), excepto los calculados y los Tickets
-    def __init__(self, id, Tipo_turno, S, Fecha, µ=None, λ=None, p=None):
-        self.id = id
-        self.Tipo_turno = Tipo_turno
+    def __init__(self, id, horas_turno, S, Fecha, µ=None, λ=None, p=None):
+        self.Id = id
+        self.Horas_Turno = horas_turno
         self.Fecha = Fecha
         self.Tickets = []
         self.µ = µ
@@ -31,8 +28,8 @@ class Turno:
     def __str__(self):
         cadena = "-----------Objeto tipo Turno-----------\n"
         print(cadena)
-        print("id =", self.id)
-        print("Tipo_turno =", self.Tipo_turno)
+        print("id =", self.Id)
+        print("Tipo_turno =", self.Horas_Turno)
         print("Fecha =", self.Fecha)
         print("µ =", self.µ)
         print("λ =", self.λ)
@@ -42,27 +39,16 @@ class Turno:
         return cadena
     # Añadimos un Ticket a la lista de Tickets del Turno
     def addTicket(self, ticket):
-            if (self.Fecha.date() == ticket.fecha_ticket.date()):
-                if (self.Tipo_turno == TipoTurno.ALMUERZO):
-                    if (ticket.fecha_ticket.hour >= 13 and ticket.fecha_ticket.hour <= 18):
-                        self.Tickets.append(ticket)
-                elif(self.Tipo_turno == TipoTurno.CENA):
-                    if (ticket.fecha_ticket.hour > 18 and ticket.fecha_ticket.hour <= 23):
-                        self.Tickets.append(ticket)
-            else:
-                # Excepción del tipo IndexError en caso de que no se pueda añadir el Ticket
-                raise IndexError("El Ticket no pertenece al Turno")
+        if (self.Fecha.date() == ticket.FechaTicket.date()):
+                if (ticket.FechaTicket.timestamp() >= self.Horas_Turno[0].timestamp() and ticket.FechaTicket.timestamp() <= self.Horas_Turno[1].timestamp()):
+                    self.Tickets.append(ticket)
+        else:
+            # Excepción del tipo IndexError en caso de que no se pueda añadir el Ticket
+            raise IndexError("El Ticket no pertenece al Turno")
             
-            
-
     # Método get para obtener el nombre de una tienda
     def getNombre(self):
         return self.nombre
-
-    # Método get para obtener la empresa a la que pertenece la tienda
-    def getEmpresa(self):
-        return self.empresa
-
     # Método get para obtener los turnos asignados
     def getTurnos(self):
         return self.turnos
@@ -75,9 +61,6 @@ class Turno:
 
     def getS(self):
         return self.S
-    
-    def getp(self):
-        return self.p
 
     '''
     Para el cálculo del µ, se ha decidido que el valor de µ será el máximo de clientes que se han atendido en una hora.
@@ -86,32 +69,20 @@ class Turno:
     def calculo_µ(self):
         max_afluencia = 0
         afluencia = 0
-        if (self.Tipo_turno == TipoTurno.ALMUERZO):
-            hora_actual = 13
-            hora_fin = 18
-            while (hora_actual <= hora_fin):
-                for ticket in self.Tickets:
-                    hora = ticket.fecha_ticket.hour
-                    if (hora == hora_actual):
-                        afluencia += 1
-                if (afluencia > max_afluencia):
-                    max_afluencia = afluencia
-                hora_actual += 1
-                afluencia = 0
-            self.µ = (max_afluencia/60.0)
-        else:
-            hora_actual = 18
-            hora_fin = 23
-            while (hora_actual <= hora_fin):
-                for ticket in self.Tickets:
-                    hora = ticket.fecha_ticket.hour
-                    if (hora == hora_actual):
-                        afluencia += 1
-                if (afluencia > max_afluencia):
-                    max_afluencia = afluencia
-                hora_actual += 1
-                afluencia = 0
-            self.µ = (max_afluencia/60.0)
+        hora_actual = int(self.Horas_Turno[0].hour)
+        hora_fin = int(self.Horas_Turno[1].hour)
+        print(hora_actual)
+        print(hora_fin)
+        while (hora_actual <= hora_fin):
+            for ticket in self.Tickets:
+                hora = ticket.FechaTicket.hour
+                if (hora == hora_actual):
+                    afluencia += 1
+            if (afluencia > max_afluencia):
+                max_afluencia = afluencia
+            hora_actual += 1
+            afluencia = 0
+        self.µ = (max_afluencia/60.0)
 
     '''
     Para el calculo de λ debemos de tener en cuenta que lo hacemos por hora,

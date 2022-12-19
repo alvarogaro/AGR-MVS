@@ -1,17 +1,21 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from agr_mvs.enumturno import TipoTurno
 from agr_mvs.tienda import Tienda
 from agr_mvs.turno import Turno
 from agr_mvs.ticket import Ticket
 from hamcrest import *
 import pytest
 from datetime import datetime
-
+horario1 = []
+horario2 = []
+horario1.append(datetime(2020, 12, 12, 13, 00))
+horario1.append(datetime(2020, 12, 12, 18, 00))
+horario2.append(datetime(2020, 12, 12, 19, 00))
+horario2.append(datetime(2020, 12, 12, 23, 00))
 tienda = Tienda("KFC")
-turno1 = Turno(1, TipoTurno.ALMUERZO, 3.0, datetime(2020, 12, 12, 00, 00))
-turno2 = Turno(2, TipoTurno.CENA, 3, datetime(2020, 12, 12, 00, 00))
+turno1 = Turno(1,horario1, 3.0, datetime(2020, 12, 12, 00, 00))
+turno2 = Turno(2, horario2, 3.0, datetime(2020, 12, 12, 00, 00))
 ticket = []
 ticket2 = []
 minutos = [20, 25, 30, 35, 40, 45, 50, 55]
@@ -20,13 +24,8 @@ minutos = [20, 25, 30, 35, 40, 45, 50, 55]
 
 hora = 13
 for i in range(1, 6):
-    ticket.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[2])))
-    ticket.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[3])))
-    ticket.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[4])))
-    ticket.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[5])))
-    ticket.append(Ticket(i, datetime(2020, 12, 12, hora+1, minutos[2])))
-    ticket.append(Ticket(i, datetime(2020, 12, 12, hora+1, minutos[3])))
-    ticket.append(Ticket(i, datetime(2020, 12, 12, hora+1, minutos[4])))
+    for j in range(2,6):
+        ticket.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[j])))
     hora += 1
 
 for tickets in ticket:
@@ -37,15 +36,8 @@ for tickets in ticket:
 
 hora = 19
 for i in range(1, 6):
-    print(hora)
-    ticket2.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[0])))
-    ticket2.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[1])))
-    ticket2.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[2])))
-    ticket2.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[3])))
-    ticket2.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[4])))
-    ticket2.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[5])))
-    ticket2.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[6])))
-    ticket2.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[7])))
+    for j in range(0,8):
+        ticket2.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[j])))
     hora += 1
 
 
@@ -117,34 +109,33 @@ y que el numero de servidores que vamos a tener es 1. Tal y como se refleja en e
 '''
 Test para comprobar la saturación
 '''
-def test_calculo_p():
+def test_calculo_saturacion():
     turno1.λ = 0.2
     turno1.µ = 0.25
     turno1.S = 1
-    print(turno1)
-    p = turno1.calculo_p()
-    assert_that(p, close_to(0.8, 0.1))
+    saturacion = turno1.calculo_saturacion()
+    assert_that(saturacion, close_to(0.8, 0.1))
 
 '''
 Calculo del numero promedio de clientes en la cola
 '''
-def test_calculo_Lq():
-    Lq = turno1.calculo_L()
-    assert_that(Lq, close_to(3.2, 0.1))
+def test_calculo_promedio_clientes_cola():
+    promedio_clientes = turno1.calculo_promedio_clientes_cola()
+    assert_that(promedio_clientes, close_to(3.2, 0.1))
 
 '''
 Calculo del tiempo promedio de espera de un cliente en la cola
 '''
-def test_calculo_W():
-    Wq = turno1.calculo_W()
-    assert_that(Wq, close_to(16, 0.1))
+def test_calculo_tiempo_espera_cola():
+    tiempo_espera_cola = turno1.calculo_tiempo_espera_cola()
+    assert_that(tiempo_espera_cola, close_to(16, 0.1))
     
 '''
 Calculo de la probabilidad de que un cliente espere en la cola mas de 25 minutos.
 '''
 
-def test_calculo_p_cola():
-    Wq = turno1.calculo_P_Cola(25)
-    assert_that(Wq, close_to(0.23, 0.1))
+def test_calculo_probabilidad_espera_cola():
+    probabilidad_cola = turno1.calculo_probabilidad_espera_cola(25)
+    assert_that(probabilidad_cola, close_to(0.23, 0.1))
 
 
