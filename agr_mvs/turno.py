@@ -49,6 +49,7 @@ class Turno:
     # Método get para obtener el nombre de una tienda
     def getNombre(self):
         return self.Nombre
+    
     def getµ(self):
         return self.µ
 
