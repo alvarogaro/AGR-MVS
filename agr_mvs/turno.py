@@ -3,59 +3,31 @@ from agr_mvs.ticket import Ticket
 import math
 
 # Constante que nos expresa la longitud del turno que es 5'5 horas.
-HORAS_TURNO = 5.5
+HORAS_TURNO = 5
 
 class Turno:
-    Id: int                      # Identificador del Turno
-    Horas_Turno: list            # Mediante este array introducimos dos datetime que nos indican el inicio y el fin del turno
-    Tickets: list                # Tickets dentro de un Turno.
-    Fecha:  datetime             # Fecha del Turno
-    µ: float                     # Clientes que son atendidos por unidad de tiempo (hora)
-    λ: float                     # Clientes que llegan por unidad de tiempo (hora)
-    S: float                     # Numero de TPV que tenemos disponibles (Nos los aporta la tienda como dato)           
+    horas_turno: list            # Mediante este array introducimos dos datetime que nos indican el inicio y el fin del turno
+    tickets: list                # tickets dentro de un Turno.
+    fecha:  datetime             # fecha del Turno           
             
-
-    
-    def __init__(self, id, horas_turno, S, Fecha, µ=None, λ=None, p=None):
-        self.Id = id
-        self.Horas_Turno = horas_turno
-        self.Fecha = Fecha
-        self.Tickets = []
+    def __init__(self, horas_turno, S, fecha):
+        self.horas_turno = horas_turno
+        self.fecha = fecha
+        self.tickets = []
         self.S = S
 
-    def __str__(self):
-        cadena = "-----------Objeto tipo Turno-----------\n"
-        print(cadena)
-        print("id =", self.Id)
-        print("Tipo_turno =", self.Horas_Turno)
-        print("Fecha =", self.Fecha)
-        print("µ =", self.µ)
-        print("λ =", self.λ)
-        print("S =", self.S)
-        print("Tickets =", self.Tickets)
-        print("\n")
-        return cadena
-    # Añadimos un Ticket a la lista de Tickets del Turno
+
+    # Añadimos un Ticket a la lista de tickets del Turno
     def addTicket(self, ticket):
-        if (self.Fecha.date() == ticket.FechaTicket.date()):
-                if (ticket.FechaTicket.timestamp() >= self.Horas_Turno[0].timestamp() and ticket.FechaTicket.timestamp() <= self.Horas_Turno[1].timestamp()):
-                    self.Tickets.append(ticket)
+        if (self.fecha.date() == ticket.FechaTicket.date()):
+                if (ticket.FechaTicket.timestamp() >= self.horas_turno[0].timestamp() and ticket.FechaTicket.timestamp() <= self.horas_turno[1].timestamp()):
+                    self.tickets.append(ticket)
         else:
             # Excepción del tipo IndexError en caso de que no se pueda añadir el Ticket
             raise IndexError("El Ticket no pertenece al Turno")
-            
-    # Método get para obtener el nombre de una tienda
-    def getNombre(self):
-        return self.Nombre
 
-    def getS(self):
-        return self.S
+ 
     
-    def get_maximo_clientes_atendidos(self):
-        return self.µ
-    
-    def get_clientes_unidad_tiempo(self):
-        return self.λ
 
     '''
     Para el cálculo del µ, se ha decidido que el valor de µ será el máximo de clientes que se han atendido en una hora.
@@ -64,12 +36,10 @@ class Turno:
     def calculo_maximo_clientes_atendidos(self):
         max_afluencia = 0
         afluencia = 0
-        hora_actual = int(self.Horas_Turno[0].hour)
-        hora_fin = int(self.Horas_Turno[1].hour)
-        print(hora_actual)
-        print(hora_fin)
+        hora_actual = int(self.horas_turno[0].hour)
+        hora_fin = int(self.horas_turno[1].hour)
         while (hora_actual <= hora_fin):
-            for ticket in self.Tickets:
+            for ticket in self.tickets:
                 hora = ticket.FechaTicket.hour
                 if (hora == hora_actual):
                     afluencia += 1
@@ -77,7 +47,7 @@ class Turno:
                 max_afluencia = afluencia
             hora_actual += 1
             afluencia = 0
-        self.µ = (max_afluencia/60.0)
+        return (max_afluencia/60.0)
 
     '''
     Para el calculo de λ debemos de tener en cuenta que lo hacemos por hora,
@@ -86,22 +56,25 @@ class Turno:
     El resultado lo vamos a dividir entre 60 para trabajar con minutos en los posteriores cálculos.
     '''
     def calculo_clientes_unidad_tiempo(self):
-        self.λ = (len(self.Tickets)/HORAS_TURNO)/60.0
+        return ((len(self.tickets)/HORAS_TURNO)/60.0)
     
     '''
-    Calculo variables elementales para el calculo de las variables estadísticas
+    Calculo variables elementales para el calculo de las variables estadísticas, 0 contiene µ, 1 contiene λ y 2 contiene S. 
     '''
     def calculo_variables_elementales(self):
-        if (self.µ == None or self.λ == None):
-            self.calculo_clientes_unidad_tiempo(self)
-            self.calculo_maximo_clientes_atendidos(self)
+        variables_elementales = []
+        variables_elementales.append(self.calculo_maximo_clientes_atendidos())
+        variables_elementales.append(self.calculo_clientes_unidad_tiempo())
+        variables_elementales.append(self.S)   
+        return variables_elementales     
     
     '''
     Mediante esta funcion vamos a poder calcular la saturacion de la tienda.
     '''
     def calculo_saturacion(self):
-        self.calculo_variables_elementales()
-        saturacion = self.λ/(self.µ*self.S)
+        variables = self.calculo_variables_elementales()
+        print(variables)
+        saturacion = variables[1]/(variables[0]*variables[2])
         return saturacion
     
     
@@ -111,7 +84,8 @@ class Turno:
     '''
     def calculo_promedio_clientes_cola(self):
         saturacion = self.calculo_saturacion()
-        promedio_clientes = saturacion * (self.λ / (self.µ - self.λ))
+        variables = self.calculo_variables_elementales()
+        promedio_clientes = saturacion * (variables[1] / (variables[0] - variables[1]))
         return promedio_clientes
 
     '''
@@ -119,9 +93,9 @@ class Turno:
     '''
     
     def calculo_tiempo_espera_cola(self):
-        self.calculo_variables_elementales()
+        variables = self.calculo_variables_elementales()
         promedio_clientes = self.calculo_promedio_clientes_cola()
-        tiempo_espera_cola = promedio_clientes / self.λ
+        tiempo_espera_cola = (promedio_clientes / variables[1])
         return tiempo_espera_cola
 
     '''
@@ -131,15 +105,16 @@ class Turno:
     '''
     def calculo_probabilidad_espera_cola(self,minutos):
         saturacion = self.calculo_saturacion()
-        exp = (-self.µ * (1 - saturacion) * minutos)
+        variables = self.calculo_variables_elementales()
+        exp = ((-variables[0]) * (1 - saturacion) * minutos)
         probabilidad_cola = saturacion * math.exp(exp)
         return probabilidad_cola
     
-    def calculo_variables_estadísticas():
-        print("La saturacion de la tienda es: "+ str(Turno.calculo_saturacion()))
-        print("El numero promedio de clientes en la cola es de : " + str(Turno.calculo_promedio_clientes_cola()))
-        print("El tiempo promedio de espera de un cliente en la cola es de : "+ str(Turno.calculo_tiempo_espera_cola())+ " minutos")
-        print("La probabilidad de que un cliente espere en la cola mas de 30 minutos es de: "+ str(Turno.calculo_probabilidad_espera_cola(30)))
+    def calculo_variables_estadísticas(self):
+        print("La saturacion de la tienda es: "+ str(self.calculo_saturacion()))
+        print("El numero promedio de clientes en la cola es de : " + str(self.calculo_promedio_clientes_cola()))
+        print("El tiempo promedio de espera de un cliente en la cola es de : "+ str(self.calculo_tiempo_espera_cola())+ " minutos")
+        print("La probabilidad de que un cliente espere en la cola mas de 30 minutos es de: "+ str(self.calculo_probabilidad_espera_cola(30)))
         
         
 
