@@ -28,24 +28,6 @@ for i in range(1,5):
 for tickets in ticket:
     turno1.addTicket(tickets)
 
-
-######################## TURNO DE LA TARDE ############################
-    
-    
-print(turno1)
-print(turno1.calculo_variables_estadísticas())
-'''
-Test comprobación que se introducen los tickets correctamente en el turno de mañana
-vamos intentando meter tickets fuera de hora y comparamos longitudes
-'''
-
-
-'''
-Todos los cálculos que vienen a continuación se van a realizar teniendo en cuenta que λ va a ser 0'2 clientes/minuto, µ va a ser 0'25 clientes/minuto
-y que el numero de servidores que vamos a tener es 1. Tal y como se refleja en el enunciado del ejercicio que se ha especificado en el issue #22 
-
-'''
-
 '''
 Test para comprobar la saturación
 '''

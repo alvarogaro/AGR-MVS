@@ -25,10 +25,7 @@ class Turno:
         else:
             # Excepción del tipo IndexError en caso de que no se pueda añadir el Ticket
             raise IndexError("El Ticket no pertenece al Turno")
-
- 
-    
-
+        
     '''
     Para el cálculo del µ, se ha decidido que el valor de µ será el máximo de clientes que se han atendido en una hora.
     Se va a dividir entre 60 para trabajar con minutos en los posteriores cálculos.
@@ -73,7 +70,6 @@ class Turno:
     '''
     def calculo_saturacion(self):
         variables = self.calculo_variables_elementales()
-        print(variables)
         saturacion = variables[1]/(variables[0]*variables[2])
         return saturacion
     
