@@ -8,24 +8,21 @@ from hamcrest import *
 import pytest
 from datetime import datetime
 horario1 = []
-horario2 = []
 horario1.append(datetime(2020, 12, 12, 13, 00))
 horario1.append(datetime(2020, 12, 12, 18, 00))
-horario2.append(datetime(2020, 12, 12, 19, 00))
-horario2.append(datetime(2020, 12, 12, 23, 00))
 tienda = Tienda("KFC")
-turno1 = Turno(1,horario1, 3.0, datetime(2020, 12, 12, 00, 00))
-turno2 = Turno(2, horario2, 3.0, datetime(2020, 12, 12, 00, 00))
+turno1 = Turno(horario1, 1.0, datetime(2020, 12, 12, 00, 00))
 ticket = []
-ticket2 = []
-minutos = [20, 25, 30, 35, 40, 45, 50, 55]
+minutos = [0,5,10,13,15,20,23,25,30,33,35,40,45,50,55]
 
 ######################## TURNO DE LA MAÑANA ############################
 
 hora = 13
-for i in range(1, 6):
-    for j in range(2,6):
-        ticket.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[j])))
+id = 1;
+for i in range(1,5):
+    for j in minutos:
+        ticket.append(Ticket(id, datetime(2020, 12, 12, hora,j)))
+        id += 1
     hora += 1
 
 for tickets in ticket:
@@ -33,71 +30,14 @@ for tickets in ticket:
 
 
 ######################## TURNO DE LA TARDE ############################
-
-hora = 19
-for i in range(1, 6):
-    for j in range(0,8):
-        ticket2.append(Ticket(i, datetime(2020, 12, 12, hora, minutos[j])))
-    hora += 1
-
-
-for tickets in ticket2:
-    turno2.addTicket(tickets)
+    
+    
+print(turno1)
+print(turno1.calculo_variables_estadísticas())
 '''
 Test comprobación que se introducen los tickets correctamente en el turno de mañana
 vamos intentando meter tickets fuera de hora y comparamos longitudes
 '''
-
-
-def test_turno_maniana_correcto():
-    ticket_test = []
-    len_inicial = len(turno1.Tickets)
-    for i in range(19, 24):
-        ticket_test.append(Ticket(i, datetime(2020, 12, 12, i, 30)))
-    for tickets in ticket_test:
-        turno1.addTicket(tickets)
-    assert_that(len(turno1.Tickets), equal_to(len_inicial))
-
-
-'''
-Igual que el test anterior pero para el turno de tardes
-'''
-
-
-def test_turno_cena_correcto():
-    len_inicial = len(turno2.Tickets)
-    ticket_test = []
-    for i in range(13, 19):
-        ticket_test.append(Ticket(i, datetime(2020, 12, 12, i, 30)))
-    for tickets in ticket_test:
-        turno2.addTicket(tickets)
-    assert_that(len(turno2.Tickets), equal_to(len_inicial))
-
-
-'''
-El cálculo de λ es dependiente del numero de tickets que tengamos, como el calculo se hace para luego trabajar en minutos, si por ejemplo tuvieramos un 
-λ de 12 clientes/hora, esto sería 0,2 clientes/minuto, por tanto un valor razonable sería un λ entre 0 y 2.
-'''
-
-
-def test_calculo_λ():
-    turno1.calculo_clientes_unidad_tiempo()
-    turno2.calculo_clientes_unidad_tiempo()
-    assert_that(turno1.get_clientes_unidad_tiempo(), less_than_or_equal_to(2) and greater_than(0))
-    assert_that(turno2.get_clientes_unidad_tiempo(), less_than_or_equal_to(2) and greater_than(0))
-
-
-'''
-El cálculo de µ es dependiente de los tickets, como el calculo se hace para luego trabajar en minutos, si por ejemplo tuvieramos un 
-µ de 15 clientes/hora, esto sería 0,25 clientes/minuto, por tanto un valor razonable sería un µ entre 0 y 2, al igual que hemos hecho con el test anterior.
-'''
-
-
-def test_calculo_maximo_clientes_atendidos():
-    turno1.calculo_maximo_clientes_atendidos()
-    turno2.calculo_maximo_clientes_atendidos()
-    assert_that(turno1.get_maximo_clientes_atendidos(), less_than_or_equal_to(2) and greater_than(0))
-    assert_that(turno2.get_maximo_clientes_atendidos(), less_than_or_equal_to(2) and greater_than(0))
 
 
 '''
@@ -110,9 +50,6 @@ y que el numero de servidores que vamos a tener es 1. Tal y como se refleja en e
 Test para comprobar la saturación
 '''
 def test_calculo_saturacion():
-    turno1.λ = 0.2
-    turno1.µ = 0.25
-    turno1.S = 1
     saturacion = turno1.calculo_saturacion()
     assert_that(saturacion, close_to(0.8, 0.1))
 
@@ -137,5 +74,9 @@ Calculo de la probabilidad de que un cliente espere en la cola mas de 25 minutos
 def test_calculo_probabilidad_espera_cola():
     probabilidad_cola = turno1.calculo_probabilidad_espera_cola(25)
     assert_that(probabilidad_cola, close_to(0.23, 0.1))
+
+
+
+
 
 
