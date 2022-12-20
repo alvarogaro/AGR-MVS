@@ -21,9 +21,7 @@ class Turno:
         self.Horas_Turno = horas_turno
         self.Fecha = Fecha
         self.Tickets = []
-        self.µ = µ
         self.S = S
-        self.λ = λ
 
     def __str__(self):
         cadena = "-----------Objeto tipo Turno-----------\n"
@@ -49,21 +47,21 @@ class Turno:
     # Método get para obtener el nombre de una tienda
     def getNombre(self):
         return self.Nombre
-    
-    def getµ(self):
-        return self.µ
-
-    def getλ(self):
-        return self.λ
 
     def getS(self):
         return self.S
+    
+    def get_maximo_clientes_atendidos(self):
+        return self.µ
+    
+    def get_clientes_unidad_tiempo(self):
+        return self.λ
 
     '''
     Para el cálculo del µ, se ha decidido que el valor de µ será el máximo de clientes que se han atendido en una hora.
     Se va a dividir entre 60 para trabajar con minutos en los posteriores cálculos.
     '''
-    def calculo_µ(self):
+    def calculo_maximo_clientes_atendidos(self):
         max_afluencia = 0
         afluencia = 0
         hora_actual = int(self.Horas_Turno[0].hour)
@@ -87,7 +85,7 @@ class Turno:
     que tenemos en el turno y las horas del turno. (Representamos cada cliente por un ticket sin valorare el importe del ticket)
     El resultado lo vamos a dividir entre 60 para trabajar con minutos en los posteriores cálculos.
     '''
-    def calculo_λ(self):
+    def calculo_clientes_unidad_tiempo(self):
         self.λ = (len(self.Tickets)/HORAS_TURNO)/60.0
     
     '''
@@ -95,8 +93,8 @@ class Turno:
     '''
     def calculo_variables_elementales(self):
         if (self.µ == None or self.λ == None):
-            self.calculo_µ()
-            self.calculo_λ()
+            self.calculo_clientes_unidad_tiempo(self)
+            self.calculo_maximo_clientes_atendidos(self)
     
     '''
     Mediante esta funcion vamos a poder calcular la saturacion de la tienda.

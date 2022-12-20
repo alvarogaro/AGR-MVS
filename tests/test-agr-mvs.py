@@ -81,10 +81,10 @@ El cálculo de λ es dependiente del numero de tickets que tengamos, como el cal
 
 
 def test_calculo_λ():
-    turno1.calculo_λ()
-    turno2.calculo_λ()
-    assert_that(turno1.getλ(), less_than_or_equal_to(2) and greater_than(0))
-    assert_that(turno2.getλ(), less_than_or_equal_to(2) and greater_than(0))
+    turno1.calculo_clientes_unidad_tiempo()
+    turno2.calculo_clientes_unidad_tiempo()
+    assert_that(turno1.get_clientes_unidad_tiempo(), less_than_or_equal_to(2) and greater_than(0))
+    assert_that(turno2.get_clientes_unidad_tiempo(), less_than_or_equal_to(2) and greater_than(0))
 
 
 '''
@@ -93,11 +93,11 @@ El cálculo de µ es dependiente de los tickets, como el calculo se hace para lu
 '''
 
 
-def test_calculo_µ():
-    turno1.calculo_µ()
-    turno2.calculo_µ()
-    assert_that(turno1.getµ(), less_than_or_equal_to(2) and greater_than(0))
-    assert_that(turno2.getµ(), less_than_or_equal_to(2) and greater_than(0))
+def test_calculo_maximo_clientes_atendidos():
+    turno1.calculo_maximo_clientes_atendidos()
+    turno2.calculo_maximo_clientes_atendidos()
+    assert_that(turno1.get_maximo_clientes_atendidos(), less_than_or_equal_to(2) and greater_than(0))
+    assert_that(turno2.get_maximo_clientes_atendidos(), less_than_or_equal_to(2) and greater_than(0))
 
 
 '''
