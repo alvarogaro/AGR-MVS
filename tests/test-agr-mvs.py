@@ -29,32 +29,25 @@ for tickets in ticket:
     turno1.addTicket(tickets)
 
 '''
-Test para comprobar la saturación
-'''
-def test_calculo_saturacion():
-    saturacion = turno1.calculo_saturacion()
-    assert_that(saturacion, close_to(0.8, 0.1))
-
-'''
 Calculo del numero promedio de clientes en la cola
 '''
-def test_calculo_promedio_clientes_cola():
-    promedio_clientes = turno1.calculo_promedio_clientes_cola()
+def test_promedio_clientes_cola():
+    promedio_clientes = turno1.promedio_clientes_cola()
     assert_that(promedio_clientes, close_to(3.2, 0.1))
 
 '''
 Calculo del tiempo promedio de espera de un cliente en la cola
 '''
-def test_calculo_tiempo_espera_cola():
-    tiempo_espera_cola = turno1.calculo_tiempo_espera_cola()
+def test_tiempo_espera_cola():
+    tiempo_espera_cola = turno1.tiempo_espera_cola()
     assert_that(tiempo_espera_cola, close_to(16, 0.1))
     
 '''
 Calculo de la probabilidad de que un cliente espere en la cola mas de 25 minutos.
 '''
 
-def test_calculo_probabilidad_espera_cola():
-    probabilidad_cola = turno1.calculo_probabilidad_espera_cola(25)
+def test_probabilidad_espera_cola():
+    probabilidad_cola = turno1.probabilidad_espera_cola(25)
     assert_that(probabilidad_cola, close_to(0.23, 0.1))
 
 
