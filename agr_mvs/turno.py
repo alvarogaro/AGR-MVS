@@ -52,12 +52,17 @@ class Turno:
         max_afluencia = 0
         afluencia = 0
 <<<<<<< HEAD
+<<<<<<< HEAD
         hora_actual = self.horas_turno[0].hour
         hora_fin = self.horas_turno[1].hour
 =======
         hora_actual = int(self.horas_turno[0].hour)
         hora_fin = int(self.horas_turno[1].hour)
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
+=======
+        hora_actual = self.horas_turno[0].hour
+        hora_fin = self.horas_turno[1].hour
+>>>>>>> 63c36a6 (Reestructuracion turno #20)
         while (hora_actual <= hora_fin):
             for ticket in self.tickets:
                 hora = ticket.FechaTicket.hour
@@ -68,10 +73,14 @@ class Turno:
             hora_actual += 1
             afluencia = 0
 <<<<<<< HEAD
+<<<<<<< HEAD
         return (max_afluencia/MINUTOS_HORA)
 =======
         return (max_afluencia/60.0)
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
+=======
+        return (max_afluencia/MINUTOS_HORA)
+>>>>>>> 63c36a6 (Reestructuracion turno #20)
 
     '''
     Para el calculo de λ debemos de tener en cuenta que lo hacemos por hora,
@@ -79,6 +88,7 @@ class Turno:
     que tenemos en el turno y las horas del turno. (Representamos cada cliente por un ticket sin valorare el importe del ticket)
     El resultado lo vamos a dividir entre 60 para trabajar con minutos en los posteriores cálculos.
     '''
+<<<<<<< HEAD
 <<<<<<< HEAD
     def __clientes_unidad_tiempo(self):
         return ((len(self.tickets)/HORAS_TURNO)/MINUTOS_HORA)
@@ -99,10 +109,18 @@ class Turno:
         variables_elementales.append(self.S)   
         return variables_elementales     
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
+=======
+    def __clientes_unidad_tiempo(self):
+        return ((len(self.tickets)/HORAS_TURNO)/MINUTOS_HORA)
+    
+  
+  
+>>>>>>> 63c36a6 (Reestructuracion turno #20)
     
     '''
     Mediante esta funcion vamos a poder calcular la saturacion de la tienda.
     '''
+<<<<<<< HEAD
 <<<<<<< HEAD
     def saturacion(self):
         µ = self.__maximo_clientes_atendidos()
@@ -113,6 +131,12 @@ class Turno:
         variables = self.calculo_variables_elementales()
         saturacion = variables[1]/(variables[0]*variables[2])
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
+=======
+    def __saturacion(self):
+        µ = self.__maximo_clientes_atendidos()
+        λ = self.__clientes_unidad_tiempo()
+        saturacion = λ/(µ*self.S)
+>>>>>>> 63c36a6 (Reestructuracion turno #20)
         return saturacion
     
     
@@ -120,6 +144,7 @@ class Turno:
     Calculo del numero promedio de clientes en la cola: Lq = p / Ls (Siendo Ls el numero promedio de clientes que entran al sistema)
     Ls = λ / (µ - λ)
     '''
+<<<<<<< HEAD
 <<<<<<< HEAD
     def promedio_clientes_cola(self):
         µ = self.__maximo_clientes_atendidos()
@@ -132,6 +157,13 @@ class Turno:
         variables = self.calculo_variables_elementales()
         promedio_clientes = saturacion * (variables[1] / (variables[0] - variables[1]))
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
+=======
+    def promedio_clientes_cola(self):
+        µ = self.__maximo_clientes_atendidos()
+        λ = self.__clientes_unidad_tiempo()
+        saturacion = self.__saturacion()
+        promedio_clientes = saturacion * ( λ / (µ - λ))
+>>>>>>> 63c36a6 (Reestructuracion turno #20)
         return promedio_clientes
 
     '''
@@ -139,16 +171,22 @@ class Turno:
     '''
     
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 63c36a6 (Reestructuracion turno #20)
     def tiempo_espera_cola(self):
         λ = self.__clientes_unidad_tiempo()
         promedio_clientes = self.promedio_clientes_cola()
         tiempo_espera_cola = (promedio_clientes / λ)
+<<<<<<< HEAD
 =======
     def calculo_tiempo_espera_cola(self):
         variables = self.calculo_variables_elementales()
         promedio_clientes = self.calculo_promedio_clientes_cola()
         tiempo_espera_cola = (promedio_clientes / variables[1])
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
+=======
+>>>>>>> 63c36a6 (Reestructuracion turno #20)
         return tiempo_espera_cola
 
     '''
@@ -156,6 +194,7 @@ class Turno:
     que es el tiempo a partir del cual se considera que podemos perder clientes. la formula es: p * e^(-µ*(1-p)*t). En este caso
     vamos a expresar el parámetro µ en minutos para que el resultado que arroje se base en minutos y no en horas. 
     '''
+<<<<<<< HEAD
 <<<<<<< HEAD
     def probabilidad_espera_cola(self,minutos):
         saturacion = self.saturacion()
@@ -179,6 +218,15 @@ class Turno:
         print("La probabilidad de que un cliente espere en la cola mas de 30 minutos es de: "+ str(self.calculo_probabilidad_espera_cola(30)))
         
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
+=======
+    def probabilidad_espera_cola(self,minutos):
+        saturacion = self.__saturacion()
+        µ = self.__maximo_clientes_atendidos()
+        exp = ((-µ) * (1 - saturacion) * minutos)
+        probabilidad_cola = saturacion * math.exp(exp)
+        return probabilidad_cola
+
+>>>>>>> 63c36a6 (Reestructuracion turno #20)
         
 
         
