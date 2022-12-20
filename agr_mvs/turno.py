@@ -4,34 +4,24 @@ import math
 
 # Constante que nos expresa la longitud del turno que es 5'5 horas.
 HORAS_TURNO = 5
-<<<<<<< HEAD
 # Constante para el paso de horas a minutos dentro de las funciones
 MINUTOS_HORA = 60
-=======
->>>>>>> e6b8f15 (Reestructuracion atributos #20)
 
 class Turno:
     horas_turno: list            # Mediante este array introducimos dos datetime que nos indican el inicio y el fin del turno
     tickets: list                # tickets dentro de un Turno.
     fecha:  datetime             # fecha del Turno           
-<<<<<<< HEAD
     S:int                       # Número de servidores del Turno
-=======
-            
->>>>>>> e6b8f15 (Reestructuracion atributos #20)
     def __init__(self, horas_turno, S, fecha):
         self.horas_turno = horas_turno
         self.fecha = fecha
         self.tickets = []
         self.S = S
 
-<<<<<<< HEAD
     
     def setS(self,servidores):
         self.S = servidores
         
-=======
->>>>>>> e6b8f15 (Reestructuracion atributos #20)
 
     # Añadimos un Ticket a la lista de tickets del Turno
     def addTicket(self, ticket):
@@ -42,6 +32,7 @@ class Turno:
             # Excepción del tipo IndexError en caso de que no se pueda añadir el Ticket
             raise IndexError("El Ticket no pertenece al Turno")
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
 
@@ -49,6 +40,9 @@ class Turno:
     
 
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
+=======
+        
+>>>>>>> 0fe79d0 (Corrección Comentarios)
     '''
     Para el cálculo del µ, se ha decidido que el valor de µ será el máximo de clientes que se han atendido en una hora.
     Vamos pasando por las distintas horas del turno y viendo la afluencia que ha habido en cada hora para quedarnos con la 
@@ -117,7 +111,6 @@ class Turno:
 =======
     def calculo_saturacion(self):
         variables = self.calculo_variables_elementales()
-        print(variables)
         saturacion = variables[1]/(variables[0]*variables[2])
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
         return saturacion
