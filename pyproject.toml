@@ -17,7 +17,7 @@ pytest = "^7.2.0"
 
 [tool.poe.tasks]
 install = "poetry install"
-check = "python -m compileall src"
+check = "python -m compileall agr_mvs"
 test = "poetry run pytest -v tests/test-agr-mvs.py"
 
 
