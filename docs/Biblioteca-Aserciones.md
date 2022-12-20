@@ -10,7 +10,7 @@
 
 * [PyHamcrest](https://snyk.io/advisor/python/pyhamcrest): Framework para matchers, mediante esta biblioteca tenemos una muy amplia gama de funcionalidades para probar "UI validations", filtrado de datos... Esta característica permite tener test legibles, limpios y de un alto valor. Tiene una puntuación en Snyk de 85, es una herramienta con un desarrollo activo y alta popularidad
   
-* [Unittest](https://snyk.io/advisor/python/unittest): Esta librería tiene una puntuación de 37 en Snyk, lleva tiempo sin recibir actualizaciones y tiene una baja popularidad. Es una librería estándar de python y por tanto forma parte del core.
+* [Unittest](https://docs.python.org/3/library/unittest.html): Librería estándar de python por tanto se encuentra en su core, no sería relevante la puntuación que tiene en Snyk.
 
 
-* Tras haber evaluado las herramientas anteriores, y haciendo un balance de los criterios anteriormente mencionados, vemos que la herramienta mas "completa" es PyHamcrest, debido a una alta puntuación junto con su gran funcionalidad para crear test con gran funcionalidad y limpieza.
+* Tras haber evaluado las herramientas anteriores, y haciendo un balance de los criterios anteriormente mencionados, vemos que la herramienta mas "completa" es PyHamcrest, debido a una alta puntuación junto con su gran funcionalidad para crear test con gran funcionalidad y limpieza. Elegimos PyHamcrest sobre Unittest ya que nos proporciona "matchers", también conocidos como "assertion functions", extra sobre los que vienen en Unittest lo que nos va a permitir tener una mayor funcionalidad a la hora de hacer los test.
