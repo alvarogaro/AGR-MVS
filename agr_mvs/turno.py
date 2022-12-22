@@ -11,13 +11,17 @@ class Turno:
     horas_turno: list            # Mediante este array introducimos dos datetime que nos indican el inicio y el fin del turno
     tickets: list                # tickets dentro de un Turno.
     fecha:  datetime             # fecha del Turno           
-            
+    S:int                       # Número de servidores del Turno
     def __init__(self, horas_turno, S, fecha):
         self.horas_turno = horas_turno
         self.fecha = fecha
         self.tickets = []
         self.S = S
 
+    
+    def setS(self,servidores):
+        self.S = servidores
+        
 
     # Añadimos un Ticket a la lista de tickets del Turno
     def addTicket(self, ticket):
@@ -64,7 +68,7 @@ class Turno:
     '''
     Mediante esta funcion vamos a poder calcular la saturacion de la tienda.
     '''
-    def __saturacion(self):
+    def saturacion(self):
         µ = self.__maximo_clientes_atendidos()
         λ = self.__clientes_unidad_tiempo()
         saturacion = λ/(µ*self.S)
@@ -78,7 +82,7 @@ class Turno:
     def promedio_clientes_cola(self):
         µ = self.__maximo_clientes_atendidos()
         λ = self.__clientes_unidad_tiempo()
-        saturacion = self.__saturacion()
+        saturacion = self.saturacion()
         promedio_clientes = saturacion * ( λ / (µ - λ))
         return promedio_clientes
 
@@ -98,7 +102,7 @@ class Turno:
     vamos a expresar el parámetro µ en minutos para que el resultado que arroje se base en minutos y no en horas. 
     '''
     def probabilidad_espera_cola(self,minutos):
-        saturacion = self.__saturacion()
+        saturacion = self.saturacion()
         µ = self.__maximo_clientes_atendidos()
         exp = ((-µ) * (1 - saturacion) * minutos)
         probabilidad_cola = saturacion * math.exp(exp)
