@@ -55,18 +55,14 @@ def test_promedio_clientes_cola():
     promedio_clientes_2 = test_turno.promedio_clientes_cola()
     assert_that(promedio_clientes_2, less_than(promedio_clientes_1))
 
-'''
-Calculo del tiempo promedio de espera de un cliente en la cola
-'''
+
 def test_tiempo_espera_cola():
     promedio_espera_cola_1 = turno1.tiempo_espera_cola()
     test_turno = Turno(horario1, servidores+1, datetime(2020, 12, 12, 00, 00))
     array_Tickets(test_turno,ticket)
     promedio_espera_cola_2 = test_turno.tiempo_espera_cola()
     assert_that(promedio_espera_cola_2, less_than(promedio_espera_cola_1))
-'''
-Calculo de la probabilidad de que un cliente espere en la cola mas de 25 minutos.
-'''
+
 
 def test_probabilidad_espera_cola():
     probabilidad_espera_cola_1 = turno1.probabilidad_espera_cola(30)
@@ -75,11 +71,6 @@ def test_probabilidad_espera_cola():
     probabilidad_espera_cola_2 = test_turno.probabilidad_espera_cola(30)
     assert_that(probabilidad_espera_cola_2, less_than(probabilidad_espera_cola_1))
     
-
-# print(turno1.saturacion())
-# print(turno1.promedio_clientes_cola())
-# print(turno1.tiempo_espera_cola())
-# print(turno1.probabilidad_espera_cola(30))
 
 
 
