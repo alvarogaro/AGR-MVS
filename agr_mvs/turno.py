@@ -122,6 +122,7 @@ class Turno:
     '''
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     def saturacion(self):
         µ = self.__maximo_clientes_atendidos()
         λ = self.__clientes_unidad_tiempo()
@@ -133,6 +134,9 @@ class Turno:
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
 =======
     def __saturacion(self):
+=======
+    def saturacion(self):
+>>>>>>> a00fb7a (productividad y reformas #26 #27)
         µ = self.__maximo_clientes_atendidos()
         λ = self.__clientes_unidad_tiempo()
         saturacion = λ/(µ*self.S)
@@ -161,7 +165,7 @@ class Turno:
     def promedio_clientes_cola(self):
         µ = self.__maximo_clientes_atendidos()
         λ = self.__clientes_unidad_tiempo()
-        saturacion = self.__saturacion()
+        saturacion = self.saturacion()
         promedio_clientes = saturacion * ( λ / (µ - λ))
 >>>>>>> 63c36a6 (Reestructuracion turno #20)
         return promedio_clientes
@@ -220,7 +224,7 @@ class Turno:
 >>>>>>> e6b8f15 (Reestructuracion atributos #20)
 =======
     def probabilidad_espera_cola(self,minutos):
-        saturacion = self.__saturacion()
+        saturacion = self.saturacion()
         µ = self.__maximo_clientes_atendidos()
         exp = ((-µ) * (1 - saturacion) * minutos)
         probabilidad_cola = saturacion * math.exp(exp)
