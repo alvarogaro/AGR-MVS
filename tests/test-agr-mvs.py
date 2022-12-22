@@ -35,6 +35,11 @@ def array_Tickets(turno, ticket):
 
 array_Tickets(turno1,ticket)
 
+'''
+En los siguientes test se va a calcular la saturacion, promedio clientes en la cola, espera en la cola y probabilidad en funcion del numero de servidores
+y comprobamos que efectivamente cuando aumentamos el numero de servidores vamos a tener valores menores, por tanto aumentaría la productividad de la tienda
+como hemos reflejado en el issue #26 vemos que la productividad es inversa a la saturacion, y la reforma de los locales va en relación al aumento de servidores
+'''
 def test_saturacion():
     saturacion1 = turno1.saturacion()
     test_turno = Turno(horario1, servidores+1, datetime(2020, 12, 12, 00, 00))
