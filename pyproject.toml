@@ -16,9 +16,12 @@ pytest = "^7.2.0"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 poethepoet = "^0.8.0"
 >>>>>>> b8df12e (Añadido poethepoet al grupo dependencias desarrollo #31)
+=======
+>>>>>>> 77ff210 (Fix Conflictos)
 
 # Dependencias para el desarrollo
 [tool.poetry.dev-dependencies]
