@@ -23,7 +23,7 @@
 * bullseye: Son imágenes basadas también en Debian11 pero con una tamaño mucho mas considerables ya que tienen muchas características adicionales del SO. En este caso el tamaño promedio de una imagen es de 330Mb, contienen muchas mas características de las necesarias para nuestra aplicación.
 
 
-## Imágenes no oficiales de Python
+## Sistemas Operativos
 
 Encontramos otras imágenes docker que no son oficiales, son imágenes creadas por empresas o por usuarios. Buscando python dentro del buscador de [dockerhub](https://hub.docker.com/search?q=python) podemos encontrar algunas imagenes verificadas como por ejemplo: 
 
