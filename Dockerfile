@@ -23,7 +23,7 @@ WORKDIR /app/test
 
 RUN poetry install  --no-interaction --no-ansi
 
-ENTRYPOINT ["poe", "--version"]
+ENTRYPOINT ["poe", "test"]
 
 
 
