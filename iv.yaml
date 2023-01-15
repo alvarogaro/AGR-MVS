@@ -1,6 +1,6 @@
 lenguaje: python
 
-entidad: src/tienda.py
+entidad: agr_mvs/tienda.py
 
 automatizar:
   fichero: pyproject.toml
