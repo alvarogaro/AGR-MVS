@@ -25,5 +25,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: alvarogaro/AGR-MVS:latest
+          tags: alvarogaro/agr-mvs:latest
         
