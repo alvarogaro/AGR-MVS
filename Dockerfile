@@ -20,6 +20,7 @@ COPY pyproject.toml poetry.lock ./
 
 # Directorio de trabajo (En caso de que no esté creado se va a crear)
 WORKDIR /app/test
+RUN chown -R 1001:1001 /app
 
 RUN poetry install  --no-interaction --no-ansi
 
