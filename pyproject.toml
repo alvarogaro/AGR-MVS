@@ -14,31 +14,7 @@ poethepoet = "^0.9.0"
 [tool.poetry.dev-dependencies]
 pyhamcrest = "^2.0.4"
 pytest = "^7.2.0"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-poethepoet = "^0.8.0"
->>>>>>> b8df12e (Añadido poethepoet al grupo dependencias desarrollo #31)
-=======
->>>>>>> 77ff210 (Fix Conflictos)
 
-<<<<<<< HEAD
-# Dependencias para el desarrollo
-[tool.poetry.dev-dependencies]
-pyhamcrest = "^2.0.4"
-pytest = "^7.2.0"
-
-=======
-# Automatización de Tareas
->>>>>>> dc8aafe (Cambio dependencias #21 #19)
-=======
-
->>>>>>> a00fb7a (productividad y reformas #26 #27)
-
-=======
->>>>>>> d882dad (Delete Comments)
 [tool.poe.tasks]
 install = "poetry install"
 check = "python -m compileall agr_mvs"
