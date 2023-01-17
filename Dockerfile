@@ -1,4 +1,4 @@
-FROM python:3.11-slim@sha256:39cecc9cde774f9209ad26a0ab2dc4f5d10ba92d2913a835cebea3b402af8e8b
+FROM python:3.11-slim@sha256:4d091e6e8ea62ee443917ffa62106f08da104c133026bcc8f153a1db92fe27cd
 
 # Configuración Poetry (https://python-poetry.org/docs#ci-recommendations)
 ENV POETRY_VERSION=1.3.2
