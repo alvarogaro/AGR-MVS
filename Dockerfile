@@ -3,19 +3,22 @@ FROM python:3.11-slim@sha256:4d091e6e8ea62ee443917ffa62106f08da104c133026bcc8f15
 
 WORKDIR /app/test
 
+ENV HOME=/app
+ENV POETRY_HOME="/opt/poetry"
 
-ENV VIRTUAL_ENV=/app/venv
+ENV PATH="$POETRY_HOME/bin:$PATH"
 
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-RUN pip install poetry
-
+RUN apt-get update \
+    && apt-get install -y curl \
+    && curl -sSL https://install.python-poetry.org | python3 -
 
 COPY pyproject.toml poetry.lock ./
-RUN poetry install 
+RUN poetry env info
+RUN poetry config virtualenvs.create false
+RUN poetry install --no-root --no-ansi
 
-RUN chown -R 1001:1001 /app/
-
+RUN chown -R 1001:1001 /app
+USER 1001
 
 ENTRYPOINT ["poe","test"]
 
