@@ -13,7 +13,6 @@ RUN apt-get update \
     && curl -sSL https://install.python-poetry.org | python3 -
 
 COPY pyproject.toml poetry.lock ./
-RUN poetry env info
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-root --no-ansi
 
