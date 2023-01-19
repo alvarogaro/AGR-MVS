@@ -21,7 +21,7 @@
 * [python:version-bullseye](https://hub.docker.com/_/python/tags?page=1&name=bullseye): Son imágenes basadas también en Debian11 pero con una tamaño mucho mas considerables ya que tienen muchas características adicionales del SO. En este caso el tamaño promedio de una imagen es de 330Mb, contienen muchas mas características de las necesarias para nuestra aplicación.
 
 
-## Sistemas Operativos
+## Imágenes no oficiales de Python
 
 Encontramos otras imágenes docker que no son oficiales, son imágenes creadas por empresas o por usuarios. Buscando python dentro del buscador de [dockerhub](https://hub.docker.com/search?q=python) podemos encontrar algunas imagenes verificadas como por ejemplo: 
 
@@ -29,12 +29,14 @@ Encontramos otras imágenes docker que no son oficiales, son imágenes creadas p
 
 * [bitnami/python](https://hub.docker.com/r/bitnami/python): Imagen de python creada por la empresa Bitnami. Estas imágenes estan bajo el soporte de la empresa de manera que cualquier bug o fallo tienen soporte. Estan basadas en una distribución Debian-slim para que el peso sea el menor posible. El tamaño promedio de estas imágenes es de 200.98 Mb. 
 
+* Estas imágenes como podemos ver, en comparación con algunas oficiales ( por ejemplo la slim), tienen un tamaño muy superior, por lo que no van a ser seleccionadas.
+
 
 ## Conclusion
 
-* Finalmente tras evaluar las distintas opciones y viendo los requerimientos que tenemos nuestro proyecto. Vamos a elegir la imagen slim de python, ya que es la de tamaño mas reducido que cumple con todos los requisitos que necesitamos. Respecto a la versión de python que vamos a utilizar, nuestro proyecto depende de poethepoet, pytest y poetry. Tanto pytest como poetry funcionan con python 3.7 o superior. Sin embargo, [poethepoet](https://github.com/nat-n/poethepoet) como podemos leer en su repositorio de Github, ha sido testeado con versiones de Python entre la 3.7 y 3.11.
+* Finalmente tras evaluar las distintas opciones y viendo los requerimientos que tenemos nuestro proyecto. Vamos a elegir la imagen slim de python, ya que es la de tamaño mas reducido que cumple con todos los requisitos que necesitamos. Respecto a la versión de python que vamos a utilizar, nuestro proyecto depende de poethepoet, pytest y poetry. Tanto pytest como poetry como poethepoet funcionan con python 3.7 o superior.
 
-* Por tanto vamos a usar la última versión de python estable soportada por todas nuestras dependencias que sería: [3.11-slim](https://hub.docker.com/layers/library/python/3.11-slim/images/sha256-4d091e6e8ea62ee443917ffa62106f08da104c133026bcc8f153a1db92fe27cd?context=explore). Respecto al SHA, hemos elegido este debido a que es el que corresponde con la arquitectura linux/amd64. 
+* Por tanto vamos a usar la versión latest de [python-slim](https://hub.docker.com/layers/library/python/slim/images/sha256-2415bc113b5cdc232dfed6f29a029adad8c9440442fdc63598d6c83a91fa573c?context=explore). Una imagen que contiene los paquetes mínimos para ejecutar python.
 
 
 
