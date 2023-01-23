@@ -7,7 +7,7 @@ ENV PATH="$POETRY_HOME/bin:$PATH" \
     HOME="/home/agr-mvs"
 
 RUN pip install poethepoet poetry
-ENV PATH="$HOME/.local/bin:$PATH"
+ENV PATH="${PATH}:${HOME}/.local/bin"
 WORKDIR /app/test
 COPY --chown=agr-mvs pyproject.toml poetry.lock ./
 RUN  poetry install && rm ./pyproject.toml ./poetry.lock
