@@ -4,9 +4,7 @@
 
 * Tamaño de la Imagen: Siguiendo las mejores prácticas vamos a tener en cuenta como un requisito fundamental el elegir la imagen con menor tamaño posible que nos proporcione todas nuestros requerimientos. De esta manera vamos a tener una mayor velocidad de descargar de la imagen, menor uso de recursos y por tanto mayor rapidez y contendrá también menos vulnerabilidades.
 
-* Dependencias: Debemos de buscar una imagen de docker que nos permita instalar las dependencias que necesitemos para nuestro proyecto. Por tanto buscaremos una imagen que tenga acceso a gran cantidad de librerías.
-
-* En base a estos 2 criterios anteriormente comentados vamos a comparar una serie de opciones: 
+* Además de este criterio vamos a tener en cuenta otros como la facilidad para la instalación tanto de nuestro lenguaje como de sus módulos y dependencias.
 
 ## Imágenes Oficiales de Python
 
@@ -21,13 +19,16 @@
 * [python:slim-bullseye](https://hub.docker.com/_/python/tags?page=1&name=bullseye): Son imágenes basadas también en Debian11 y con un tamaño promedio de 45Mb. Son imágenes slim que contienen el sistema operativo y las herramientas necesarias para ejecutar python.
 
 
-## Sistemas Operativos
+## Imágenes no oficiales de Python
 
 * Encontramos otras imágenes docker que no son oficiales, son imágenes creadas por empresas o por usuarios. Buscando python dentro del buscador de [dockerhub](https://hub.docker.com/search?q=python) podemos encontrar algunas imagenes verificadas como por ejemplo: 
 
 * [circleci/python](https://hub.docker.com/r/circleci/python): Son una serie de imágenes docker que estan recomendadas principalmente para usuarios que buscan crear una imagen muy específica para su proyecto. Tienen un tamaño promedio de 1.00 Gb. Un tamaño muy grande por tanto no va a ser seleccionada.
 
 * [bitnami/python](https://hub.docker.com/r/bitnami/python): Imagen de python creada por la empresa Bitnami. Estas imágenes estan bajo el soporte de la empresa de manera que cualquier bug o fallo tienen soporte. Estan basadas en una distribución Debian-slim para que el peso sea el menor posible. El tamaño promedio de estas imágenes es de 200.98 Mb. Por tanto va a tener un tamaño muy grande con una cantidad de herramientas que no vamos a usar
+
+
+## Sistemas Operativos
 
 * [debian:stable-slim](https://hub.docker.com/layers/library/debian/stable-slim/images/sha256-9554f6caf2cafc99ad9873a822e1aafbb29d40608fe7ebe6569365b80fa5a422?context=explore): Sistema operativo Debian 11, basado en Debian 11. Tienen un tamaño promedio de 29.94Mb. Tiene un tamaño bastante reducido y al ser la versión slim va a tener muy pocas herramientas instaladas por defecto.
 
